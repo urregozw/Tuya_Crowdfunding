@@ -30,13 +30,13 @@
     <li>
       <a href="#Sobre-el-proyecto">Sobre el proyecto</a>
       <ul>
-        <li><a href="#Construido-con">Herramientas utilizadas</a></li>
+        <li><a href="#Herramientas-utilizadas">Herramientas utilizadas</a></li>
       </ul>
     </li>
-    <li><a href="#contributing">Contribuir</a></li>
-    <li><a href="#license">Licencia</a></li>
-    <li><a href="#contact">Contacto</a></li>
-    <li><a href="#acknowledgements">Reconocimientos</a></li>
+    <li><a href="#Contribuyendo">Contribuyendo</a></li>
+    <li><a href="#Licencia">Licencia</a></li>
+    <li><a href="#Contacto">Contacto</a></li>
+    <li><a href="#Reconocimientos">Reconocimientos</a></li>
   </ol>
 
 <!-- ABOUT THE PROJECT -->
