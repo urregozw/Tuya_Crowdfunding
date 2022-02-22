@@ -2,7 +2,10 @@
 <br />
 <p align="center">
   <a href="https://github.com/urregozw/Tuya_Crowdfunding">
-    <img src="public/img/logos/movietown-transparent.png" alt="Logo" width="800" height="800">
+    <img src="entrega1_sprint0/Logos/dev1.PNG" alt="Logo" width="200" height="auto">
+  </a>
+  <a href="https://github.com/urregozw/Tuya_Crowdfunding">
+    <img src="entrega1_sprint0/Logos/tuya.PNG" alt="Logo" width="200" height="auto">
   </a>
 
   <h3 align="center">Tuya Crowd Funding</h3>
@@ -10,38 +13,38 @@
   <p align="center">
     Una aplicación de inversiones en asociación con Tuya
     <br />
-    <a href="https://github.com/jpgomezt/MovieTown/wiki"><strong>Explore the Wiki »</strong></a>
+    <a href="https://github.com/urregozw/Tuya_Crowdfunding/wiki"><strong>Explorar la Wiki »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/jpgomezt/MovieTown">View Demo</a>
+    <a href="https://github.com/urregozw/Tuya_Crowdfunding/">Mirar un Demo</a>
     ·
-    <a href="https://github.com/jpgomezt/MovieTown/issues">Report Bug</a>
+    <a href="https://github.com/urregozw/Tuya_Crowdfunding/issues">Reportar un problema</a>
     ·
-    <a href="https://github.com/jpgomezt/MovieTown/issues">Request Feature</a>
+    <a href="https://github.com/urregozw/Tuya_Crowdfunding/issues">Sugerir una mejora</a>
   </p>
 </p>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-<summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+<summary><h2 style="display: inline-block">Tabla de contenidos</h2></summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project">Sobre el proyecto</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with">Construido con</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#getting-started">Comenzando el proyecto</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#prerequisites">Pre requisitos</a></li>
+        <li><a href="#installation">Instalación</a></li>
       </ul>
     </li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#contributing">Contribuir</a></li>
+    <li><a href="#license">Licencia</a></li>
+    <li><a href="#contact">Contacto</a></li>
+    <li><a href="#acknowledgements">Reconocimientos</a></li>
   </ol>
 </details>
 
