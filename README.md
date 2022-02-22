@@ -25,13 +25,12 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
-<details open="open">
 <summary><h2 style="display: inline-block">Tabla de contenidos</h2></summary>
   <ol>
     <li>
-      <a href="#about-the-project">Sobre el proyecto</a>
+      <a href="#Sobre-el-proyecto">Sobre el proyecto</a>
       <ul>
-        <li><a href="#built-with">Construido con</a></li>
+        <li><a href="#Construido-con">Construido con</a></li>
       </ul>
     </li>
     <li>
@@ -46,7 +45,6 @@
     <li><a href="#contact">Contacto</a></li>
     <li><a href="#acknowledgements">Reconocimientos</a></li>
   </ol>
-</details>
 
 <!-- ABOUT THE PROJECT -->
 
@@ -54,9 +52,11 @@
 
 Esto es un proyecto en asociación con Tuya, para hacer un sistema de inversión e inversionistas realizado con Angular, .NET y MongoDB.
 
-### Built With
+### Construido con
 
--   [Laravel](https://github.com/laravel/laravel)
+-   [.NET](https://github.com/dotnet)
+-   [Angular](https://github.com/angular)
+-   [MongoDB](https://github.com/mongodb/mongo)
 
 <!-- GETTING STARTED -->
 
