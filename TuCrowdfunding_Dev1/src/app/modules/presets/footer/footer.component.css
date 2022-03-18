@@ -1,0 +1,15 @@
+.footer{
+    bottom:0px;
+    background-color:var(--primary-red);
+    width:100%;
+    height: 65px;
+    padding-right: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    
+    }
+    .logo{
+        display: flex;
+        align-items: center;  
+    }

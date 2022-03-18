@@ -1,0 +1,32 @@
+[  
+    {  
+      "id": 1,  
+      "lenguage": "ES",  
+      "currency": "COP"
+    },  
+    {  
+      "id": 2,  
+      "lenguage": "ES",  
+      "currency": "USD" 
+    },  
+    {  
+      "id": 3,  
+      "lenguage": "ES",  
+      "currency": "EU"  
+    },  
+    {  
+      "id": 4,  
+      "lenguage": "EN",  
+      "currency": "COP" 
+    },  
+    {  
+      "id": 5,  
+      "lenguage": "EN",  
+      "currency": "USD"  
+    },
+    {  
+        "id": 6,  
+        "lenguage": "EN",  
+        "currency": "EU"  
+    }  
+  ]  

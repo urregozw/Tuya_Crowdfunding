@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* You can add global styles to this file, and also import other style files */
+
+  :root {
+    --primary-red: #ED1C29;
+    --primary-white: #FFFFFF;
+    --body-color:#EAEAEA;
+    --box-color:#F0F0F0;
+  }
+.circular{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-red);
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.btn-primary{
+  background-color: var(--primary-red) !important;
+  border-color: var(--primary-red) !important;
+  width: 130px;
+  height: 50px;
+}
+.card_container{
+  padding: 50px;
+  
+}
+.card-lg{
+  padding: 50px;
+  padding-top: 25px;
+  border-radius: 25px;
+  background-color: var(--box-color);
+  box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
+  height: calc(100vh - 230px);
+
+}
+
+.card-md{
+  padding: 50px;
+  padding-top: 25px;
+  border-radius: 25px;
+  background-color: var(--box-color);
+  box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
+  height: calc(100vh - 375px);
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.misideas{
+  display: flex;
+  justify-content: center;
+}
+.card_content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
