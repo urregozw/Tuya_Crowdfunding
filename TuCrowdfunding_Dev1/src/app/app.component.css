@@ -1,0 +1,9 @@
+@import url(../styles.css);
+
+.content{
+    background-color: var(--body-color);
+    min-height: calc(100vh - 130px);
+}
+
+
+
