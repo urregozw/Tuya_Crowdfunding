@@ -8,16 +8,20 @@ namespace backend.Services
     public class ProjectService : IProjectService
     {
         private readonly IMongoCollection<Project> _projects;
+        private readonly IMongoCollection<Entrepreneur> _entrepreneurs;
 
         public ProjectService(IDatabaseSettings settings, IMongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _projects = database.GetCollection<Project>(settings.ProjectCollectionName);
+            _entrepreneurs = database.GetCollection<Entrepreneur>(settings.EntrepreneurCollectionName);
         }
-
         public Project Create(Project project)
         {
             _projects.InsertOne(project);
+            Entrepreneur currentEntrepreneur = _entrepreneurs.Find(entrepreneur => entrepreneur.Id == project.Entrepreneur).FirstOrDefault();
+            currentEntrepreneur.Projects.Add(project.Id);
+            _entrepreneurs.ReplaceOne(entrepreneur => entrepreneur.Id == currentEntrepreneur.Id, currentEntrepreneur);
             return project;
         }
 
@@ -41,4 +45,4 @@ namespace backend.Services
             _projects.ReplaceOne(project => project.Id == id, project);
         }
     }
-}
+} 
