@@ -29,6 +29,6 @@ namespace backend.Models
         public bool IsStaff { get; set; }
 
         [BsonElement("projects")]
-        public virtual ICollection<Project> Projects { get; set; }
+        public ICollection<string> Projects { get; set; }
     }
 }
