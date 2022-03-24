@@ -1,6 +1,6 @@
-    <div  class="card-lg">
+    <div  class="ideacard">
         <h1>MIS IDEAS</h1>
-        <div *ngIf="!ideas" class="misideas">
+        <div *ngIf="!hasideas" class="misideas">
             <div class="card-md">
                 <div class="card_content" style="text-align: center;">
                     <h1>NO TIENES NINGUNA IDEA REGISTRADA</h1>
@@ -11,8 +11,17 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="ideas" class="misideas">
-            <span>ideas</span>
+        <div class="card" style="border-radius: 25px;">
+            <div class="card-body">
+                <div class="row row-cols-auto" *ngFor="let idea of ideas">
+                    <div style="margin: 5px;">
+    
+                        <app-idea [idea]="idea"></app-idea>
+                    </div>
+    
+                </div>
+            </div>
+    
         </div>
     </div>
 

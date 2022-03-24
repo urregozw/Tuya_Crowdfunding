@@ -42,11 +42,20 @@ namespace backend
             services.AddControllers();
 
             services.AddSwaggerGen();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", p => p
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+                .WithExposedHeaders());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("AllowAll");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

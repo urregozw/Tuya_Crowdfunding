@@ -6,4 +6,45 @@
 }
 
 
+.banner{
+    background-color:var(--primary-white);
+    width:100%;
+    max-width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    }
+    .logo{
+        display: flex;
+        align-items: center;
+        
+    }
+    .vl {
+        
+        border-left: 2px solid rgba(0, 0, 0, 0.50);
+        height: 50px !important;
+    }
+    .content{
+        background-color: var(--body-color);
+        min-height: calc(100vh - 140px);
+    }
+      
+    
+    .logo{
+        display: flex;
+        align-items: center;  
+    }
+    .vl {
+        margin-left: 5px;
+        border-left: 2px solid rgba(0, 0, 0, 0.50);
+        height: 40px;
+    }
+    .options{
+        margin-top: 20px;
+    }
+    .profile{
+        border: solid;
+    }
 
+    

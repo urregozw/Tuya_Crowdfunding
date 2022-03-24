@@ -14,12 +14,18 @@ import {MatButtonModule} from '@angular/material/button'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IdeaComponent } from './idea/idea.component';
+import { ListIdeasComponent } from './list-ideas/list-ideas.component';
+
 
 
 @NgModule({
   declarations: [
+    ListIdeasComponent,
     MisIdeasComponent,
-    IdeaRegisterComponent
+    IdeaRegisterComponent,
+    IdeaComponent,
+    
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --primary-white: #FFFFFF;
     --body-color:#EAEAEA;
     --box-color:#F0F0F0;
+    --idea-color:#E0E0E0;
   }
 .circular{
   border-radius: 50%;
@@ -56,11 +57,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .misideas{
   display: flex;
-  justify-content: center;
 }
 .card_content{
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+.ideaCard{
+  height: 450px;
+  width: 350px;
+  border-radius: 25px;
+  background-color:var(--idea-color);
+  padding: 25px;
 }

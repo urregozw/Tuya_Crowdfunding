@@ -12,24 +12,24 @@ import {MatAutocompleteModule}from '@angular/material/autocomplete'
 import {MatIconModule} from '@angular/material/icon'
 import {MatButtonModule} from '@angular/material/button'
 import {SharedDataModule} from '../shared/shared-data/shared-data.module';
-import { BannerComponent } from './modules/presets/banner/banner.component';
 import { FooterComponent } from './modules/presets/footer/footer.component';
 import { IndexComponent } from './modules/index/index.component';
 import { ListIdeasComponent } from './modules/ideas/list-ideas/list-ideas.component' 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {ProjectService} from './services/project.service'
+import { HttpClientModule } from '@angular/common/http';
+import { MisIdeasComponent } from './modules/ideas/mis-ideas/mis-ideas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BannerComponent,
     FooterComponent,
     IndexComponent,
-    ListIdeasComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -46,7 +46,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,     //Add if needed  
     MatStepperModule, MatInputModule, MatButtonModule
   ],
-  providers: [SharedDataModule],
+  providers: [SharedDataModule,ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

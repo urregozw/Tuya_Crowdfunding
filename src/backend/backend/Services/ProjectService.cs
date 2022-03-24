@@ -35,6 +35,11 @@ namespace backend.Services
             return _projects.Find(project => project.Id == id).FirstOrDefault();
         }
 
+        public List<Project> GetByUserId(string id)
+        {
+            return _projects.Find(project => project.Entrepreneur == id).ToList();
+        }
+
         public void Remove(string id)
         {
             _projects.DeleteOne(project => project.Id == id);

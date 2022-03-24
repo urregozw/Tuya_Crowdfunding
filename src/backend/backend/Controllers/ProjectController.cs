@@ -40,6 +40,20 @@ namespace backend.Controllers
 
             return project;
         }
+        // GET: api/Project
+        [HttpGet("byuser/{userId}")]
+        public ActionResult<List<Project>> GetByUserId(string userId)
+        {
+            var projects = projectService.GetByUserId(userId);
+
+            if (projects == null)
+            {
+                return NotFound($"Project with id = {userId} not found");
+            }
+
+            return projects;
+        }
+        
 
         // POST: api/Project
         [HttpPost]
@@ -81,5 +95,7 @@ namespace backend.Controllers
 
             return Ok($"Project with id = {id} deleted");
         }
+
+
     }
 }
