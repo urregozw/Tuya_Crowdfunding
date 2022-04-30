@@ -16,6 +16,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IdeaComponent } from './idea/idea.component';
 import { ListIdeasComponent } from './list-ideas/list-ideas.component';
+import { ModifyComponent } from './modify/modify.component';
+import { CreateComponent } from './create/create.component';
 
 
 
@@ -25,9 +27,13 @@ import { ListIdeasComponent } from './list-ideas/list-ideas.component';
     MisIdeasComponent,
     IdeaRegisterComponent,
     IdeaComponent,
+    ModifyComponent,
+    CreateComponent,
     
   ],
   imports: [
+    ReactiveFormsModule,//Add if needed 
+    FormsModule, 
     CommonModule,
     IdeasRoutingModule,
     MatAutocompleteModule, 

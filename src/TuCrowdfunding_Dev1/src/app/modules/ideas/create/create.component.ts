@@ -1,36 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import {Location} from '@angular/common';
-
 @Component({
-  selector: 'app-idea-register',
-  templateUrl: './idea-register.component.html',
-  styleUrls: ['./idea-register.component.css']
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.css']
 })
-export class IdeaRegisterComponent implements OnInit {
-  userid:any=localStorage.getItem('userId')
+export class CreateComponent implements OnInit {
   ideaFormGroup: FormGroup;
   idea:any;
   constructor(
     private location: Location,
     private formBuilder: FormBuilder, 
     private router: Router,
-    private projectService:ProjectService,
-    
-    private route: ActivatedRoute,
+    private projectService:ProjectService
   ) { }
 
   ngOnInit(): void {
-    this.idea ={
-      title: '',
-      description: '',
-      projectDays: 0,
-      fundGoal: 0,
-      category: '',
-      entrepreneur:this.userid
-  };
+    this.idea=JSON.parse(localStorage.getItem("idea")||"");
     console.log(this.idea);
 
     this.ideaFormGroup = this.formBuilder.group({
@@ -50,15 +39,13 @@ export class IdeaRegisterComponent implements OnInit {
     
     var project=this.ideaFormGroup.value;
     project.id=this.idea.id
-    console.warn(project); 
-    this.projectService.createProject(this.idea)
+    console.warn(project);
+    this.projectService.editProject(this.idea)
     
     
     
   }
   goback(){
-    this.router.navigate(['misideas'], { relativeTo: this.route.parent });
+    this.location.back();
   }
 }
-
-

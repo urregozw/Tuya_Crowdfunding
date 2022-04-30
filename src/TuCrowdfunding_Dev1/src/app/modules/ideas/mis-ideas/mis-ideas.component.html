@@ -13,6 +13,11 @@
         </div>
         <div class="card" style="border-radius: 25px;">
             <div class="card-body">
+                <div class="float-end">
+                    <button (click)="ideaRegister()" class="btn btn-primary">
+                        Crear Idea
+                    </button>
+                </div>
                 <div class="row row-cols-auto" *ngFor="let idea of ideas">
                     <div style="margin: 5px;">
     

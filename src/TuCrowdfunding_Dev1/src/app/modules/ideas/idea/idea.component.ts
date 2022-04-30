@@ -1,5 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-idea',
@@ -7,13 +7,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./idea.component.css']
 })
 export class IdeaComponent implements OnInit {
-  router: string;
+
+  public routea: string;
+  
 @Input() idea:any;
-  constructor(private _router: Router,) { this.router = _router.url }
+  constructor(private router: Router,private route: ActivatedRoute) { this.routea=router.url  }
 
   ngOnInit(): void {
+    console.log(this.route.parent);
     console.warn(this.idea);
 
   }
+  editIdea(){
+    localStorage.setItem('idea',JSON.stringify(this.idea));
 
+    this.router.navigate(['modificar'], { relativeTo: this.route.parent });
+  }
 }

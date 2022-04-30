@@ -1,3 +1,4 @@
+
 <div class="row">
     <form class="col-12" [formGroup]="ideaFormGroup" (submit)="modify($event)" novalidate>
       <h1> Editar {{idea.title}} </h1>
@@ -51,15 +52,15 @@
           </div>
         <div>
           <div class="float-start">
-            <button class="btn btn-primary" (click)="goback()">
+            <button class="btn-primary" (click)="goback()">
             
                 Volver
               </button>
           </div>
           <div class="float-end">
-            <button class="btn btn-primary" type="submit">
+            <button class="btn-primary" type="submit">
             
-                Crear
+                Editar
               </button>
           </div>
           

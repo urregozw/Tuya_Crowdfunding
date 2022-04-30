@@ -3,14 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import {Location} from '@angular/common';
-
 @Component({
-  selector: 'app-idea-register',
-  templateUrl: './idea-register.component.html',
-  styleUrls: ['./idea-register.component.css']
+  selector: 'app-modify',
+  templateUrl: './modify.component.html',
+  styleUrls: ['./modify.component.css']
 })
-export class IdeaRegisterComponent implements OnInit {
-  userid:any=localStorage.getItem('userId')
+export class ModifyComponent implements OnInit {
   ideaFormGroup: FormGroup;
   idea:any;
   constructor(
@@ -23,14 +21,7 @@ export class IdeaRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.idea ={
-      title: '',
-      description: '',
-      projectDays: 0,
-      fundGoal: 0,
-      category: '',
-      entrepreneur:this.userid
-  };
+    this.idea=JSON.parse(localStorage.getItem("idea")||"");
     console.log(this.idea);
 
     this.ideaFormGroup = this.formBuilder.group({
@@ -50,8 +41,8 @@ export class IdeaRegisterComponent implements OnInit {
     
     var project=this.ideaFormGroup.value;
     project.id=this.idea.id
-    console.warn(project); 
-    this.projectService.createProject(this.idea)
+    console.warn(project);
+    this.projectService.editProject(this.idea)
     
     
     
@@ -60,5 +51,3 @@ export class IdeaRegisterComponent implements OnInit {
     this.router.navigate(['misideas'], { relativeTo: this.route.parent });
   }
 }
-
-
