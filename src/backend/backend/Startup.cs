@@ -39,7 +39,11 @@ namespace backend
 
             services.AddScoped<IEntrepreneurService, EntrepreneurService>();
 
-            services.AddControllers();
+            services.AddScoped<IDonationService, DonationService>();
+
+            services.AddScoped<IContributorService, ContributorService>();
+
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen();
             services.AddCors(options =>
