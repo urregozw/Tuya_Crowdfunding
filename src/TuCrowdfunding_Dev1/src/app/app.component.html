@@ -1,0 +1,80 @@
+<!-- Toolbar -->
+<section class="banner">
+   <div class="float-start">
+       <div class="row" style="margin-left: 5px;">
+           <div class="col">
+               <img src="../assets/logo_tuya.svg" alt="logo-tuya" width="50" height="50">
+
+           </div>
+           <div class="col">
+               <div class="vl"></div>
+
+           </div>
+           <div class="col">
+               <mat-form-field appearance="fill">
+                   <mat-label>Buscar Ideas</mat-label>
+                   <input matInput>
+               </mat-form-field>
+           </div>
+       </div>
+
+   </div>
+   <div class="float-end" >
+       <div class="row" style="margin-right: 5px;">
+           <div class="col">
+               <mat-form-field appearance="fill">
+                   <mat-label>Idioma y Moneda</mat-label>
+                   <mat-select>
+                       <mat-option *ngFor="let option of options" [value]="option.language">
+                           {{option.language}} - {{option.currency}}
+                       </mat-option>
+                   </mat-select>
+               </mat-form-field>
+           </div>
+           <div *ngIf="!logged" class="col">
+               <div class="row">
+                   <div class="col">
+                       <button (click)="login()" type="button" class="btn btn-primary">Ingresar</button>
+
+                   </div> 
+
+               </div>
+           </div>
+           <div *ngIf="!logged" class="col">
+               <div class="row">
+                   <div class="col">
+                       <button (click)="signin()"type="button" class="btn btn-primary">Registrarse</button>
+                   </div>
+               </div>
+           </div>
+
+
+
+           <div *ngIf="logged" class="col">
+               <div class="row">
+                   <div class="col">
+                       <button (click)="ideas()" class="circular">
+                           <img src="../assets/Icono_ideas.svg" alt="misIdeas" width="30" height="30"
+                               fill="#ffffff">
+                       </button>
+                   </div>
+                   <div class="col">
+                       <button class="circular">
+                           <img src="../assets/icono_chateanos.svg" alt="logo-tuya" width="30" height="30"
+                               fill="#ffffff">
+                       </button>
+                   </div>
+               </div>
+           </div>
+
+       </div>
+   </div>
+</section>
+ 
+<div class="content" role="main">
+   <router-outlet></router-outlet>
+</div>
+
+<app-footer></app-footer> 
+
+  
