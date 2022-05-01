@@ -71,5 +71,16 @@ namespace backend.Services
             _contributors.ReplaceOne(contributor => contributor.Id == currentContributor.Id, currentContributor);
             _donation.ReplaceOne(donation => donation.Id == id, donation);
         }
+
+        public List<Donation> LitsContributorDonations(string contributorId)
+        {
+            return _donation.Find(donation => donation.Contributor == contributorId).ToList();
+        }
+
+        public List<Donation> LitsProjectFunds(string projectId)
+        {
+            return _donation.Find(donation => donation.Project == projectId).ToList();
+        }
+
     }
 }

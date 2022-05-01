@@ -91,5 +91,34 @@ namespace backend.Controllers
 
             return Ok($"Donation with id = {id} deleted");
         }
+
+        // GET: api/Project
+        [HttpGet("list/contributor/{contributorId}")]
+        public ActionResult<List<Donation>> LitsContributorDonations(string contributorId)
+        {
+            var donations = donationService.LitsContributorDonations(contributorId);
+
+            if (donations == null)
+            {
+                return NotFound($"Project with id = {contributorId} not found");
+            }
+
+            return donations;
+        }
+
+        // GET: api/Project
+        [HttpGet("list/project/{projectId}")]
+        public ActionResult<List<Donation>> LitsProjectFunds(string projectId)
+        {
+            var donations = donationService.LitsProjectFunds(projectId);
+
+            if (donations == null)
+            {
+                return NotFound($"Project with id = {projectId} not found");
+            }
+
+            return donations;
+        }
+
     }
 }
