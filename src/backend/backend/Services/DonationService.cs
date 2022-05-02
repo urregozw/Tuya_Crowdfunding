@@ -22,16 +22,20 @@ namespace backend.Services
 
         public Donation Create(Donation donation)
         {
+            Contributor currentContributor = _contributors.Find(contributor => contributor.Id == donation.Contributor).FirstOrDefault();
+            if (currentContributor.Money < donation.DonatedFunds)
+            {
+                throw new Exception("Specify a correct amount of money");
+            }
             _donation.InsertOne(donation);
+            currentContributor.Donations.Add(donation.Id);
+            currentContributor.Money -= donation.DonatedFunds;
+            _contributors.ReplaceOne(contributor => contributor.Id == currentContributor.Id, currentContributor);
             Project currentProject = _projects.Find(project => project.Id == donation.Project).FirstOrDefault();
             currentProject.Donations.Add(donation.Id);
             currentProject.FundsCollected += donation.DonatedFunds;
             currentProject.Backers += 1;
             _projects.ReplaceOne(project => project.Id == currentProject.Id, currentProject);
-            Contributor currentContributor = _contributors.Find(contributor => contributor.Id == donation.Contributor).FirstOrDefault();
-            currentContributor.Donations.Add(donation.Id);
-            currentContributor.Money -= donation.DonatedFunds;
-            _contributors.ReplaceOne(contributor => contributor.Id == currentContributor.Id, currentContributor);
             return donation;
         }
 
