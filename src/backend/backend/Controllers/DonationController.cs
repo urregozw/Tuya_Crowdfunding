@@ -44,20 +44,19 @@ namespace backend.Controllers
 
         // POST: api/Donation
         [HttpPost]
-        public ActionResult<Donation> Post([FromBody] JObject data)
+        public ActionResult<Donation> Post([FromBody] Donation donation)
         {
-            Donation donation = data["donation"].ToObject<Donation>();
+            try
+            {
+                donationService.Create(donation);
 
-            Contributor contributor = data["contributor"].ToObject<Contributor>();
+                return CreatedAtAction(nameof(Get), new { id = donation.Id }, donation);
+            }
 
-            if (contributor.Money < donation.DonatedFunds)
+            catch (Exception)
             {
                 return BadRequest($"Specify a correct amount of money");
             }
-
-            donationService.Create(donation);
-
-            return CreatedAtAction(nameof(Get), new { id = donation.Id }, donation);
         }
 
         // PUT: api/Donation/5
