@@ -15,6 +15,9 @@ export class ProjectService {
   async getProjects():Promise<Observable<any[]>> {
     return await this.httpClient.get<any[]>(environment.back + 'api/Project')
   }
+  getProjectById(id):Observable<any>{
+    return this.httpClient.get<any>(environment.back + `api/Project/${id}`)
+  }
   async getProjectsbyUser():Promise<Observable<any[]>> {
     return await this.httpClient.get<any[]>(environment.back + 'api/Project/byuser/'+this.user)
   }
@@ -45,6 +48,28 @@ export class ProjectService {
       )
     })
     
+  }
+  getEntrepreneur(id:string):Observable<any>{
+    console.log(id);
+    
+    return this.httpClient.get<any>(environment.back + `api/Entrepreneur/${id}`)
+  }
+
+  getDonation(id:string):Observable<any>{
+    console.log(id);
+    
+    return this.httpClient.get<any>(environment.back + `api/Donation/list/project/${id}`)
+  }
+
+  donate(data):Promise<any>{
+    return new Promise((resolve,reject)=>{
+      resolve(
+        this.httpClient.post<any>((environment.back + 'api/Donation'), data,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe()
+      
+      )
+    })
+    
+
   }
 }
 

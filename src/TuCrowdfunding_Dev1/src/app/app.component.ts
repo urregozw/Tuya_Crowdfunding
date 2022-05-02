@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private shared: SharedDataModule,private router: Router){}
   options: any = this.shared.languageOptions
   title = 'TuCrowdfunding_Dev1';
-  userName = localStorage.setItem("userId","623bd3ca9f3abc2692ed1a64");
+  userName = localStorage.setItem("userId","626fc476190e48a046598500");
   login(){
     this.logged=true
   }

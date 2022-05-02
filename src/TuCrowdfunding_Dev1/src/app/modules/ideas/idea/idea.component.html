@@ -1,18 +1,35 @@
 <div class="ideaCard">
     <div class="row">
-        <h1>{{idea.title}}</h1>
-        <p>{{idea.entrepreneur}}</p>
+        <h1 >
+            {{idea.title}}
+            </h1>
+        <p>{{entrepreneur.name}}</p>
 
-        <div class="col-6">
-            <p>{{idea.description}}</p>
+        <div class="col-6" >
+            <div class="description">
+                <p >{{idea.objective}}</p>
+
+            </div>
         </div>
-        <div class="col-6">
-            img
-        </div>
+        <!--<div class="col-6">
+            <embed [src]="photoURL()"  type="video/mp4">
+        </div>-->
+
+            <div class="row">
+                <div class="col-6">
+                    <p>Objetivo: {{idea.fundGoal}}</p>
+                </div>
+                <div class="col-6">
+                    <p>Recaudado: {{donations}}</p>
+                </div>
+            </div>
+
+
         <!--<div class="chart">
             graph
         </div>-->
-        
         <button (click)="editIdea()" type="button" class="btn btn-primary" *ngIf="routea == '/ideas/misideas'">Editar</button>
+        <button (click)="seeIdea()" type="button" class="btn btn-primary" >Ver Idea</button>
+    
     </div>
 </div>

@@ -1,1 +1,45 @@
-<p>selected-ideas works!</p>
+<div class="ideaCard">
+    <div class="row">
+        <h1 >
+            {{idea.title}}
+            </h1>
+        <p>{{entrepreneur.name}}</p>
+
+        <div class="col-6" >
+            <div class="description">
+                <p >{{idea.objective}}</p>
+
+            </div>
+        </div>
+        <!--<div class="col-6">
+            <embed [src]="photoURL()"  type="video/mp4">
+        </div>-->
+
+            <div class="row">
+                <div class="col-6">
+                    <p>Objetivo: {{idea.fundGoal}}</p>
+                </div>
+                <div class="col-6">
+                    <p>Recaudado: {{donations}}</p>
+                </div>
+            </div>
+
+
+        <!--<div class="chart">
+            graph
+        </div>-->
+        <form class="col-12" [formGroup]="ideaFormGroup" (submit)="donateIdea($event)" novalidate>
+            <mat-form-field appearance="fill" >
+                <input required
+                    matInput aria-label="State" type="number"
+                    formControlName="amount" id="donationamount" [(ngModel)]="amounts"
+                    >
+                </mat-form-field>
+                <button class="btn btn-primary" type="submit">
+            
+                    Editar
+                  </button>
+        </form>
+        
+    </div>
+</div>

@@ -21,6 +21,8 @@ export class ListIdeasComponent implements OnInit {
         this.proyectos=ideas
       });
     })
+
   }
+
 
 }
