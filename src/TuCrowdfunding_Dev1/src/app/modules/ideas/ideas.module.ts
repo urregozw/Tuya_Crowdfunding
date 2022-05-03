@@ -19,6 +19,7 @@ import { ListIdeasComponent } from './list-ideas/list-ideas.component';
 import { ModifyComponent } from './modify/modify.component';
 import { CreateComponent } from './create/create.component';
 import { SelectedIdeasComponent } from './selected-ideas/selected-ideas.component';
+import { YouTubePlayerModule } from "@angular/youtube-player";
 
 
 
@@ -34,6 +35,7 @@ import { SelectedIdeasComponent } from './selected-ideas/selected-ideas.componen
     
   ],
   imports: [
+    YouTubePlayerModule,
     ReactiveFormsModule,//Add if needed 
     FormsModule, 
     CommonModule,

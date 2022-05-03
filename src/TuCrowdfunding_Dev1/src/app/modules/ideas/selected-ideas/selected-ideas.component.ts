@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { StringDecoder } from 'string_decoder';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-selected-ideas',
@@ -18,6 +19,9 @@ export class SelectedIdeasComponent implements OnInit {
   public donations:number=0;
   public user:any;
   public amounts:any
+  public sect="proyecto";
+  public donators:any;
+
   ideaFormGroup: FormGroup;
   constructor(private router: Router,private route: ActivatedRoute,private ideaService:ProjectService,private sanitazer:DomSanitizer,
     private formBuilder: FormBuilder) { }
@@ -29,12 +33,15 @@ export class SelectedIdeasComponent implements OnInit {
     this.ideaFormGroup = this.formBuilder.group({
       amount: [0, Validators.required],
   });
+  
 
 
   }
   getIdea(){
     this.ideaService.getProjectById(this.id).subscribe((data)=>{//console.log(data);
     this.idea=data
+    console.log(this.idea);
+    
     this.getEntrepreneur()
     this.getDonations()
     })
@@ -42,13 +49,15 @@ export class SelectedIdeasComponent implements OnInit {
   getEntrepreneur(){
     console.warn(this.idea);
     this.ideaService.getEntrepreneur(this.idea['entrepreneur']).subscribe((data)=>{
-      this.entrepreneur=data;      
+      this.entrepreneur=data;  
+          
     })
   }
 
   getDonations(){
 
   this.ideaService.getDonation(this.idea['id']).subscribe((data)=>{
+    this.donators=data.reverse();   
     data.forEach(element => {
       this.donations+=element.donatedFunds
       
@@ -76,6 +85,13 @@ export class SelectedIdeasComponent implements OnInit {
     })
     
     
+  }
+  changeSect(e){
+    this.sect=e
+    
+  }
+  videoId(){
+    return "DBlpENLksHI"
   }
 
 

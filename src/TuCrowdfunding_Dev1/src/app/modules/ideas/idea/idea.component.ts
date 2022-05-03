@@ -56,7 +56,7 @@ export class IdeaComponent implements OnInit {
   seeIdea(){
     localStorage.setItem('IDidea',this.idea.id);
     console.log("si");
-    this.router.navigate(['adasdasdsa'], { relativeTo: this.route.parent });
+    this.router.navigate([this.idea.title], { relativeTo: this.route.parent });
     
   }
 

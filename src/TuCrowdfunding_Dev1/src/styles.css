@@ -65,8 +65,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: center;
 }
 .ideaCard{
-  height: 450px;
+  height: 100%;
   width: 350px;
+  border-radius: 25px;
+  background-color:var(--idea-color);
+  padding: 25px;
+}
+.ideaCardLarge{
+  margin-top: 25px;
+  height: 100%;
+  width: calc(100vw - 10%);
   border-radius: 25px;
   background-color:var(--idea-color);
   padding: 25px;
