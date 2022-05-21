@@ -30,5 +30,9 @@ namespace backend.Models
 
         [BsonElement("projects")]
         public ICollection<string> Projects { get; set; }
+
+        [BsonElement("chats")]
+        [BsonDefaultValue(new string[] { })]
+        public ICollection<string> Chats { get; set; }
     }
 }
