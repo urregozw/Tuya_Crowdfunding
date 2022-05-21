@@ -13,14 +13,14 @@ export class CreateComponent implements OnInit {
   idea:any;
   constructor(
     private location: Location,
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private router: Router,
     private projectService:ProjectService
   ) { }
 
   ngOnInit(): void {
     this.idea=JSON.parse(localStorage.getItem("idea")||"");
-    console.log(this.idea);
+
 
     this.ideaFormGroup = this.formBuilder.group({
       title: ['', Validators.required],
@@ -31,19 +31,17 @@ export class CreateComponent implements OnInit {
   });
   }
   modify(e:any){
-    console.log(e);
-    console.log(this.ideaFormGroup.value);
+
     this.idea.projectDays=parseInt(this.idea.projectDays)
     this.idea.fundGoal=parseInt(this.idea.fundGoal)
-    console.log(this.idea);
-    
+
+
     var project=this.ideaFormGroup.value;
     project.id=this.idea.id
-    console.warn(project);
     this.projectService.editProject(this.idea)
-    
-    
-    
+
+
+
   }
   goback(){
     this.location.back();

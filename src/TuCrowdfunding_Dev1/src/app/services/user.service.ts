@@ -6,14 +6,23 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class UserService {
+
   user=localStorage.getItem("userId")
   constructor(
     private httpClient:HttpClient
   ) { }
 
-  async getProjects():Promise<Observable<any[]>> {
-    return await this.httpClient.get<any[]>(environment.back + 'api/Project')
+  async getFavProjects():Promise<Observable<any[]>> {
+    return await this.httpClient.get<any[]>(environment.back + 'api/Contributor/'+this.user)
+  }
+  addToFavs(data):Promise<any>{
+    return new Promise((resolve,reject)=>{
+      resolve(
+        this.httpClient.post<any>((environment.back + 'api/Contributor/project/add'), data,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe()
+
+      )
+    })
   }
   getProjectById(id):Observable<any>{
     return this.httpClient.get<any>(environment.back + `api/Project/${id}`)
@@ -23,7 +32,7 @@ export class ProjectService {
   }
   editProject(project:any):Promise<any>{
     const data=JSON.stringify(project)
-
+    console.log(data);
     var url:string = (environment.back + 'api/Project/'+ project.id);
 
 

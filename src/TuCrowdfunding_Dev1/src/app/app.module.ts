@@ -14,36 +14,42 @@ import {MatButtonModule} from '@angular/material/button'
 import {SharedDataModule} from '../shared/shared-data/shared-data.module';
 import { FooterComponent } from './modules/presets/footer/footer.component';
 import { IndexComponent } from './modules/index/index.component';
-import { ListIdeasComponent } from './modules/ideas/list-ideas/list-ideas.component' 
+import { ListIdeasComponent } from './modules/ideas/list-ideas/list-ideas.component'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ProjectService} from './services/project.service'
 import { HttpClientModule } from '@angular/common/http';
 import { MisIdeasComponent } from './modules/ideas/mis-ideas/mis-ideas.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgxEditorModule } from 'ngx-editor';
+import { AuthComponent } from './modules/auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     IndexComponent,
+    AuthComponent,
+
   ],
   imports: [
+
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatAutocompleteModule, 
-    MatButtonModule, 
-    MatCheckboxModule, 
-    MatFormFieldModule, 
-    MatIconModule, 
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
-    MatSelectModule, 
+    MatSelectModule,
     MatToolbarModule,
     MatStepperModule,
-    ReactiveFormsModule,//Add if needed 
-    FormsModule,     //Add if needed  
+    ReactiveFormsModule,//Add if needed
+    FormsModule,     //Add if needed
     MatStepperModule, MatInputModule, MatButtonModule
   ],
   providers: [SharedDataModule,ProjectService],

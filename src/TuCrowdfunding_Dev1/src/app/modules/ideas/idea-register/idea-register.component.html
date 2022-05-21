@@ -1,69 +1,159 @@
 <div class="row">
-    <form class="col-12" [formGroup]="ideaFormGroup" (submit)="modify($event)" novalidate>
-      <h1> Editar {{idea.title}} </h1>
-      <div class="row card-basic">
-        <div class="row">
-          <label >Titulo de la idea</label>
-          <mat-form-field appearance="fill" >
-            <input required
-                matInput aria-label="State"
-                formControlName="title" id="ideatittle" [(ngModel)]="idea.title"
-                >
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <label >Descripcion de la idea</label>
-            <mat-form-field appearance="fill" >
-              <input required
-                  matInput aria-label="State"
-                  formControlName="description" id="ideadesc" [(ngModel)]="idea.description"
-                  >
-              </mat-form-field>
+  <div class="wizzardContent">
+    <div class="titles">
+      <h4>Paso {{step}} de 3</h4>
+      <h3>{{stepNames[step-1]}}</h3>
+    </div>
+    <div class="stepper-content">
+      <mat-stepper linear #stepper labelPosition="bottom" (selectionChange)="changeStep($event)" color="warn">
+        <mat-step [stepControl]="ideaFormGroup[0]" [editable]="true">
+          <div class="stepContent">
+            <div class="form">
+              <form [formGroup]="ideaFormGroup[0]">
+                <div class="row card-basic">
+                  <div class="row">
+                    <label >Titulo de la idea</label>
+                    <mat-form-field appearance="fill" >
+                      <input required
+                          matInput aria-label="State"
+                          formControlName="title" id="ideatittle"
+                          >
+                          </mat-form-field>
+                  </div>
+                  <div class="row">
+                      <label >Descripcion de la idea</label>
+                      <mat-form-field appearance="fill" >
+                        <input required
+                            matInput aria-label="State"
+                            formControlName="about" id="ideadesc"
+                            >
+                        </mat-form-field>
+                    </div>
+                  <div class="row">
+                      <label >Objetivo a recaudar</label>
+                      <mat-form-field appearance="fill" readonly >
+                        <input required
+                            matInput aria-label="State"
+                            formControlName="fundGoal"  id="fundGoal"
+                             >
+
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                      <label >Categoria de la idea</label>
+                      <mat-form-field appearance="fill" >
+                        <input required
+                            matInput aria-label="State"
+                            formControlName="category" id="category"
+                            >
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                      <label >Categoria de la idea</label>
+                      <mat-form-field appearance="fill" >
+                        <input required
+                            matInput aria-label="State"
+                            formControlName="subcategory" id="subcategory"
+                            >
+                        </mat-form-field>
+                    </div>
+                  <div>
+                    <div class="float-end">
+                      <button matStepperNext class="btn btn-primary">
+
+                          Siguiente
+                        </button>
+                    </div>
+
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-        <div class="row">
-            <label >Objetivo a recaudar</label>
-            <mat-form-field appearance="fill" readonly >
-              <input required 
-                  matInput aria-label="State"
-                  formControlName="fundGoal" [(ngModel)]="idea.fundGoal" id="fundGoal"
-                   >
-                  
-              </mat-form-field>
+        </mat-step>
+
+        <mat-step [stepControl]="ideaFormGroup[1]" [editable]="true">
+          <div class="stepContent">
+            <div class="question">
+              <h2>Cuentanos de tu idea</h2>
+            </div>
+            <div class="form">
+              <form [formGroup]="ideaFormGroup[1]">
+                      <div class="NgxEditor__Wrapper">
+                        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                        <ngx-editor formControlName="description"
+                          [editor]="editor"
+                          [ngModel]="html"
+                          [disabled]="false"
+                          [placeholder]="'Type here...'"
+
+                        ></ngx-editor>
+                      </div>
+              </form>
+            </div>
+            <div class="float-start">
+              <button matStepperPrevious class="btn btn-primary" >
+
+                  Volver
+                </button>
+            </div>
+            <div class="float-end">
+              <button matStepperNext class="btn btn-primary">
+
+                  Siguiente
+                </button>
+            </div>
           </div>
-        <div class="row">
-                <label >Duracion de la idea</label>
-                <mat-form-field appearance="fill" >
-                    <input required
-                        matInput aria-label="State"
-                        formControlName="projectDays" id="projectDays" numbersOnly [(ngModel)]="idea.projectDays"
-                        >
-                    </mat-form-field>
+        </mat-step>
+        <mat-step [stepControl]="ideaFormGroup[2]" [editable]="true">
+          <div class="stepContent">
+            <div class="question">
+              <h2>Material de soporte</h2>
+            </div>
+            <div class="form">
+              <form [formGroup]="ideaFormGroup[2]">
+                <div class="row card-basic">
+                  <div class="row">
+                    <label >PDF de documentacion</label>
+                    <mat-form-field appearance="fill" >
+                      <input required
+                          matInput aria-label="State"
+                          formControlName="pdf" id="ideatittle"
+                          >
+                      </mat-form-field>
+                  </div>
+                  <div class="row">
+                    <label >Adjunta video de Youtube</label>
+                    <mat-form-field appearance="fill" >
+                      <input required
+                          matInput aria-label="State"
+                          formControlName="videoLink" id="category"
+                          >
+                      </mat-form-field>
+                  </div>
+                  </div>
+
+              </form>
+            </div>
+            <div class="float-start">
+              <button matStepperPrevious class="btn btn-primary" >
+
+                  Volver
+                </button>
+            </div>
+            <div class="float-end">
+              <button matStepperNext (click)="changePage()" class="btn btn-primary">
+
+                  Siguiente
+                </button>
+            </div>
           </div>
-          
-          <div class="row">
-            <label >Categoria de la idea</label>
-            <mat-form-field appearance="fill" >
-              <input required
-                  matInput aria-label="State"
-                  formControlName="category" id="category" [(ngModel)]="idea.category"
-                  >
-              </mat-form-field>
-          </div>
-        <div>
-          <div class="float-start">
-            <button class="btn btn-primary" (click)="goback()">
-            
-                Volver
-              </button>
-          </div>
-          <div class="float-end">
-            <button class="btn btn-primary" type="submit">
-            
-                Crear
-              </button>
-          </div>
-          
-        </div>
-      </div>
-    </form>
+        </mat-step>
+      </mat-stepper>
+    </div>
+
   </div>
+  </div>
+
+

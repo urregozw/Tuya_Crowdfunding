@@ -1,22 +1,28 @@
 <div class="ideacard">
     <mat-toolbar class="toolbar">
         <div class="spacer"></div>
-        <a mat-button routerLink="/users">
+        <a mat-button (click)="type('Todas')">
+          <h1>TODAS</h1>
+        </a>
+        <a mat-button (click)="type('Populares')">
             <h1>POPULARES</h1>
         </a>
-        <a mat-button routerLink="/add">
+        <a mat-button (click)="type('Nuevas')">
             <h1>NUEVAS</h1>
         </a>
-        <a mat-button routerLink="/ideas/ban">
+        <a mat-button (click)="type('Completas')">
             <h1>FINALIZANDO</h1>
         </a>
+        <a mat-button (click)="getFavs()">
+          <h1>FAVORITOS</h1>
+      </a>
     </mat-toolbar>
     <div class="card" style="border-radius: 25px;">
         <div class="card-body">
-            <div class="row row-cols-auto" *ngFor="let proyecto of proyectos">
+            <div  *ngFor="let proyecto of proyectos">
                 <div style="margin: 5px;">
 
-                    <app-idea [idea]="proyecto"></app-idea>
+                  <app-idea [idea]="proyecto" [favorites]="favorites"></app-idea>
                 </div>
 
             </div>

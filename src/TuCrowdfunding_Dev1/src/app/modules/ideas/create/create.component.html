@@ -24,11 +24,11 @@
         <div class="row">
             <label >Objetivo a recaudar</label>
             <mat-form-field appearance="fill" readonly >
-              <input required 
+              <input required
                   matInput aria-label="State"
                   formControlName="fundGoal" [(ngModel)]="idea.fundGoal" id="fundGoal"
                    >
-                  
+
               </mat-form-field>
           </div>
         <div class="row">
@@ -40,7 +40,7 @@
                         >
                     </mat-form-field>
           </div>
-          
+
           <div class="row">
             <label >Categoria de la idea</label>
             <mat-form-field appearance="fill" >
@@ -53,17 +53,17 @@
         <div>
           <div class="float-start">
             <button class="btn-primary" (click)="goback()">
-            
+
                 Volver
               </button>
           </div>
           <div class="float-end">
             <button class="btn-primary" type="submit">
-            
+
                 Editar
               </button>
           </div>
-          
+
         </div>
       </div>
     </form>

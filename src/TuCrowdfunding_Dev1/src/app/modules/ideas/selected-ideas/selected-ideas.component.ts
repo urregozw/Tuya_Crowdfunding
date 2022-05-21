@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { StringDecoder } from 'string_decoder';
 import { Chart } from 'chart.js';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-selected-ideas',
@@ -21,49 +22,77 @@ export class SelectedIdeasComponent implements OnInit {
   public amounts:any
   public sect="proyecto";
   public donators:any;
-
+  public icon="favorite_border";
+  public favorites:any;
   ideaFormGroup: FormGroup;
   constructor(private router: Router,private route: ActivatedRoute,private ideaService:ProjectService,private sanitazer:DomSanitizer,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,    private userService:UserService) { }
 
   ngOnInit(): void {
+    var description=document.getElementById('#description')
+
+
     this.id= localStorage.getItem('IDidea');
     this.user= localStorage.getItem('userId');
     this.getIdea()
     this.ideaFormGroup = this.formBuilder.group({
       amount: [0, Validators.required],
   });
-  
 
+
+
+  }
+  getfavs(){
+    this.userService.getFavProjects().then((data)=>{
+      data.subscribe((data)=>{console.log(data['projectOfInterest']);
+      this.favorites=data['projectOfInterest']
+      if (this.favorites.includes(this.idea.id)){
+        this.icon="favorite"
+      }
+      })
+
+
+    })
+
+  }
+  setFavs(){
+    const request={
+      "contributorId":this.user,
+      "projectId":this.idea.id
+      }
+    this.icon="favorite"
+    this.userService.addToFavs(request)
+    console.log(request);
 
   }
   getIdea(){
-    this.ideaService.getProjectById(this.id).subscribe((data)=>{//console.log(data);
+    this.ideaService.getProjectById(this.id).subscribe((data)=>{
     this.idea=data
-    console.log(this.idea);
-    
+
+
     this.getEntrepreneur()
     this.getDonations()
+    this.getfavs()
     })
   }
   getEntrepreneur(){
-    console.warn(this.idea);
+
     this.ideaService.getEntrepreneur(this.idea['entrepreneur']).subscribe((data)=>{
-      this.entrepreneur=data;  
-          
+      this.entrepreneur=data;
+
     })
   }
 
   getDonations(){
 
   this.ideaService.getDonation(this.idea['id']).subscribe((data)=>{
-    this.donators=data.reverse();   
+    this.donators=data.reverse();
     data.forEach(element => {
       this.donations+=element.donatedFunds
-      
+
     });
-  
-  
+
+
 });
 
   }
@@ -78,21 +107,28 @@ export class SelectedIdeasComponent implements OnInit {
       "contributor": this.user ,
       "project": this.id
     }
-    console.log(request);
-     this.ideaService.donate(request).then((data)=>{console.log(data);
+
+     this.ideaService.donate(request).then((data)=>{
       alert("Donacion realizada con exito")
       window.location.reload()
     })
-    
-    
+
+
   }
   changeSect(e){
     this.sect=e
-    
+
   }
   videoId(){
-    return "DBlpENLksHI"
+    var url=this.idea.video
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[2].length == 11) {
+      return match[2]
+    } else {
+      //error
+    }
   }
 
 
-} 
+}

@@ -2,33 +2,36 @@
     <div class="d-flex justify-content-center">
 
         <div class="ideaCardLarge">
+          <button class="d-flex float-end"(click)="setFavs()" style="background-color:transparent;border: 0;">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">{{icon}}</mat-icon>
+          </button>
             <div class="row">
                 <div class="col-8">
                     <div class="ideaInfoCard">
                         <h1>{{idea.title}}</h1>
                         <span alt="Desc">
-                            {{idea.description}}    
+                            {{idea.objective}}
                         </span>
                         <div class="categoria">
                             <img src="../../../../assets/icon-recarga.svg" style="width: 50px;">
                             <span>{{idea.category}}</span>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <youtube-player videoId="DBlpENLksHI" suggestedQuality="highres">
+                        <div class="d-flex justify-content-center" >
+                            <youtube-player [videoId]="videoId()" suggestedQuality="highres">
                             </youtube-player>
                         </div>
-        
+
                         <div class="col">
                             <p>Compartir este proyecto</p>
                             <img src="../../../../assets/facebook-svgrepo-com.svg" style="width: 30px;">
                             <img src="../../../../assets/whatsapp-svgrepo-com.svg" style="width: 30px;">
-        
+
                         </div>
-        
+
                     </div>
                 </div>
                 <div class="col-4">
-    
+
                     <div>
                        <h2>Recaudado:</h2>
                        <h1>{{idea.fundsCollected}}</h1>
@@ -36,10 +39,13 @@
                     </div>
                     <div>
                         <div style="width:100%;">
-                            Grafica (Proximamente)
+                          <app-graphs
+                          goal={{idea.fundGoal}}
+                          collected={{idea.fundsCollected}}
+                        ></app-graphs>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-top: 10px">
                         <span>
                             {{idea.donations.length}} Donadores han apoyado este proyecto
                         </span>
@@ -51,11 +57,11 @@
                     <div>
                         <form class="row" [formGroup]="ideaFormGroup" (submit)="donateIdea($event)" novalidate>
                             <mat-form-field appearance="fill" readonly >
-                                <input required 
+                                <input required
                                     matInput aria-label="State" type="number"
                                     formControlName="amount" [(ngModel)]="amounts" id="Donatedamount"
                                      >
-                                    
+
                             </mat-form-field>
                             <button class="btn btn-primary" type="submit"> Donar</button>
                         </form>
@@ -84,20 +90,13 @@
                 <div class="col-8">
                     <div class="ideaInfo">
                         <div class="col">
-                            <div class="d-flex justify-content-center">
-                                <img src="../../../../assets/icon-recarga.svg" style="width: 1000px;">
-                            </div>
-                            
+
                             <div style="margin: 25px;">
-                                <div class="d-flex justify-content-center">
-                                    <div>
-                                        <span>{{idea.description}}</span>    
-                                    </div>
-                                </div>  
+                              <div innerHTML="{{idea.description}}"></div>
                             </div>
-    
+
                             <div class="col-4">
-     
+
                                 <div class="d-flex justify-content-center">
                                 <div>
                                     <H1>En Caso de no recaudar el dinero haremos:</H1>
@@ -119,9 +118,9 @@
                                             <h3>OP1</h3>
                                         </li>
                                     </ul>
-                                </div> 
+                                </div>
 
-                            </div>   
+                            </div>
                             </div>
                             <div style="margin: 25px;">
                                 <span>
@@ -132,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Logros, 
+                <!--Logros,
                 <div class="col-4">
                     <div class="d-flex justify-content-center">
                         <div class="card" style="width: 500px;">
@@ -171,9 +170,9 @@
                             </div>
                         </div>
                     </div>
-    
+
                 </div>PDF-->
-    
+
             </div>
         </section>
         <section *ngIf="sect=='novedades'">
@@ -190,7 +189,7 @@
             <div class="row">
                 <div class="d-flex justify-content-center">
                     <div>
-                        <div *ngFor="let donator of donators"> 
+                        <div *ngFor="let donator of donators">
                             <h1>{{donator.contributor}} </h1>
                             <p>ha donado {{donator.donatedFunds}}</p>
                             <hr>
