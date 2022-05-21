@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using backend.Models;
 using backend.Services;
 
@@ -85,26 +80,21 @@ namespace backend.Controllers
 
         // POST: api/Contributor
         [HttpPost("project/add")]
-        public ActionResult AddProject([FromBody] JObject data)
+        public ActionResult AddProject([FromBody] FavoriteProject favoriteProject)
         {
-            string contributorId = data["contributorId"].ToObject<string>();
-            string projectId = data["projectId"].ToObject<string>();
+            contributorService.AddProjectToInterest(favoriteProject.ContributorId, favoriteProject.ProjectId);
 
-            contributorService.AddProjectToInterest(contributorId, projectId);
-
-            return Ok($"Project with id = {projectId} added to interest");
+            return Ok($"Project with id = {favoriteProject.ProjectId} added to interest");
         }
 
         // POST: api/Contributor/recharge
         [HttpPost("recharge")]
-        public ActionResult Recharge([FromBody] JObject data)
+        public ActionResult Recharge([FromBody] Recharge recharge)
         {
-            string contributorId = data["contributorId"].ToObject<string>();
-            float rechargeAmount = data["rechargeAmount"].ToObject<float>();
 
-            float totalMoney = contributorService.Recharge(contributorId, rechargeAmount);
+            float totalMoney = contributorService.Recharge(recharge.ContributorId, recharge.RechargeAmount);
 
-            return Ok($"Recharged {rechargeAmount} amount into account. Total is {totalMoney}");
+            return Ok($"Recharged {recharge.RechargeAmount} amount into account. Total is {totalMoney}");
         }
     }
 }
