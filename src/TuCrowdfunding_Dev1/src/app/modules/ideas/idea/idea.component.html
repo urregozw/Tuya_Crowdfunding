@@ -1,38 +1,68 @@
-<div class="ideaCard">
+
+  <div class="ideaCard">
+    <button class="d-flex float-end"(click)="setFavs()" style="background-color:transparent;border: 0;">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">{{icon}}</mat-icon>
+    </button>
     <div class="row">
-        <h1 >
-            {{idea.title}}
-            </h1>
-        <p>{{entrepreneur.name}}</p>
+      <div class="col-8">
 
-        <div class="col-6" >
-            <div class="description">
-                <p >{{idea.objective}}</p>
-
-            </div>
+        <h1>{{idea.title}}</h1>
+        <span alt="Desc">
+          {{idea.objective}}
+        </span>
+        <div class="categoria">
+          <img src="../../../../assets/icon-recarga.svg" style="width: 50px;">
+          <span>{{idea.category}}</span>
         </div>
-        <!--<div class="col-6">
-            <embed [src]="photoURL()"  type="video/mp4">
-        </div>-->
+        <div class="d-flex justify-content-center">
+          <youtube-player [videoId]="videoId()" suggestedQuality="highres">
+          </youtube-player>
+        </div>
 
-            <div class="row">
-                <div class="col-6">
-                    <p>Objetivo: {{idea.fundGoal}}</p>
-                </div>
-                <div class="col-6">
-                    <p>Recaudado: {{donations}}</p>
-                </div>
-            </div>
+        <div class="col">
+          <p>Compartir este proyecto</p>
+          <img src="../../../../assets/facebook-svgrepo-com.svg" style="width: 30px;">
+          <img src="../../../../assets/whatsapp-svgrepo-com.svg" style="width: 30px;">
+
+        </div>
 
 
-        <!--<div class="chart">
-            graph
-        </div>-->
-        <youtube-player videoId="DBlpENLksHI" suggestedQuality="highres"   [height]="200"
-        [width]="300">
-        </youtube-player>
-        <button (click)="editIdea()" type="button" class="btn btn-primary" *ngIf="routea == '/ideas/misideas'">Editar</button>
-        <button (click)="seeIdea()" type="button" class="btn btn-primary" >Ver Idea</button>
-    
+      </div>
+      <div class="col-4">
+
+        <div >
+          <h2>Recaudado:</h2>
+          <h1>{{idea.fundsCollected}}</h1>
+          <h1>De {{idea.fundGoal}}</h1>
+        </div>
+        <div>
+          <div style="width:100%;">
+            <app-graphs
+              goal={{idea.fundGoal}}
+              collected={{idea.fundsCollected}}
+            ></app-graphs>
+          </div>
+
+        </div>
+        <div>
+          <span>
+            {{idea.donations.length}} Donadores han apoyado este proyecto
+          </span>
+          <span>
+            Creado por {{entrepreneur.name}}
+          </span>
+        </div>
+
+      </div>
+
     </div>
-</div>
+    <br>
+    <div class="d-flex justify-content-between">
+      <button (click)="editIdea()" type="button" class="btn btn-primary" *ngIf="routea == '/ideas/misideas'">Editar</button>
+      <button (click)="editIdea()" type="button" class="btn btn-primary" style="width: auto;" *ngIf="routea == '/ideas/misideas'">Agregar Novedades</button>
+      <button (click)="seeIdea()" type="button" class="btn btn-primary" >Ver Idea</button>
+
+    </div>
+
+
+  </div>

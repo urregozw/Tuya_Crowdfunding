@@ -20,6 +20,10 @@ import { ModifyComponent } from './modify/modify.component';
 import { CreateComponent } from './create/create.component';
 import { SelectedIdeasComponent } from './selected-ideas/selected-ideas.component';
 import { YouTubePlayerModule } from "@angular/youtube-player";
+import { NgxEditorModule } from 'ngx-editor';
+import { GraphsComponent } from '../graphs/graphs.component';
+import { NgChartsModule } from 'ng2-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -32,21 +36,26 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
     IdeaComponent,
     ModifyComponent,
     CreateComponent,
-    
+    GraphsComponent
+
   ],
   imports: [
+    NgxChartsModule,
+    NgChartsModule,
+
+    NgxEditorModule,
     YouTubePlayerModule,
-    ReactiveFormsModule,//Add if needed 
-    FormsModule, 
+    ReactiveFormsModule,//Add if needed
+    FormsModule,
     CommonModule,
     IdeasRoutingModule,
-    MatAutocompleteModule, 
-    MatButtonModule, 
-    MatCheckboxModule, 
-    MatFormFieldModule, 
-    MatIconModule, 
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
-    MatSelectModule, 
+    MatSelectModule,
     MatToolbarModule,
     MatStepperModule,
     MatStepperModule, MatInputModule, MatButtonModule

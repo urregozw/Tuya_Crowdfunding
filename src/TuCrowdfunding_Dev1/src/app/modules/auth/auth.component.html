@@ -1,0 +1,69 @@
+
+<div class="Logincontent" >
+
+  <div class="col-md-6 align-self-center justify-content-center">
+    <div class="card" >
+
+        <h4 class="card-header">Ingreso TuCrowfunding</h4>
+        <div class="card-body">
+          <div class="col">
+            <div class="row">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="email" formControlName="username" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control"  />
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col">
+                      <label for="userType">Ingresar Como</label>
+
+                      <div>
+                        <input type="radio" formControlName="userType" value="entrepreneur" />
+                        <label class="form-check-label" for="entrepreneur">Contribudor</label>
+                      </div>
+                      <div>
+                        <input type="radio" formControlName="userType" value="contributor" />
+                        <label class="form-check-label" for="contributor">Emprendedor</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <br>
+                      <button type="submit" class="btn btn-primary float-end">
+                        Ingresar
+                    </button>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+                </form>
+            </div>
+            <div class="row">
+              <div>
+                Social Login
+                <br><br><br><br>
+              </div>
+            </div>
+            <div class="row">
+              <hr>
+              <div>
+                No tienes una cuenta, <a href="">Registrarse</a>
+
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+    </div>
+  </div>
+</div>
+
