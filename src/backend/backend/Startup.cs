@@ -43,6 +43,12 @@ namespace backend
 
             services.AddScoped<IContributorService, ContributorService>();
 
+            services.AddScoped<IChatService, ChatService>();
+
+            services.AddScoped<IMessageService, MessageService>();
+
+            services.AddScoped<IAuthService, AuthService>();
+
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddSwaggerGen();
