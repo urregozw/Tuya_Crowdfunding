@@ -43,6 +43,9 @@ namespace backend.Models
         [BsonElement("category")]
         public string Category { get; set; }
 
+        [BsonElement("sub_category")]
+        public string SubCategory { get; set; }
+
         [BsonElement("status")]
         public int Status { get; set; }
 
