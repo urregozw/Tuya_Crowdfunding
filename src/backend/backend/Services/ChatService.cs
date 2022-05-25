@@ -67,6 +67,10 @@ namespace backend.Services
             return _chats.Find(chat => (chat.Contributor == contributorId && chat.Entrepreneur == entrepreneurId)).FirstOrDefault();
         }
 
+        public List<Chat> FindByUser(string user)
+        {
+            return _chats.Find(chat => (chat.Contributor == user || chat.Entrepreneur == user)).ToList();
+        }
         public void Remove(string id)
         {
             _chats.DeleteOne(chat => chat.Id == id);

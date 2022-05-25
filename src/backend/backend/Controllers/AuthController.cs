@@ -27,7 +27,7 @@ namespace backend.Controllers
                 return NotFound($"User not found");
             }
 
-            return userId;
+            return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(userId));
         }
 
     }
