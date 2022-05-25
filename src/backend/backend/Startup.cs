@@ -50,22 +50,30 @@ namespace backend
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddControllers().AddNewtonsoftJson();
-
+            services.AddSignalR();
             services.AddSwaggerGen();
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", p => p
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowAnyOrigin()
-                .WithExposedHeaders());
-            });
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+                    builder =>
+                    {
+                        builder.AllowAnyHeader()
+                               .AllowAnyMethod()
+                               .SetIsOriginAllowed((host) => true)
+                               .AllowCredentials();
+                    }));
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors("AllowAll");
+            app.UseCors("CorsPolicy");
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/hub/chat");
+            });
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -85,6 +93,13 @@ namespace backend
             {
                 endpoints.MapControllers();
             });
+            app.UseWebSockets(new WebSocketOptions
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),
+            });
+
+            // Than register your hubs here with a url.
+
         }
     }
 }

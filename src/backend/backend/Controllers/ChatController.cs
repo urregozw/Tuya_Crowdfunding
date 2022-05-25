@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
 using backend.Services;
+using Microsoft.AspNetCore.SignalR;
 
 namespace backend.Controllers
 {
@@ -10,10 +11,12 @@ namespace backend.Controllers
     public class ChatController : ControllerBase
     {
         private readonly IChatService chatService;
+        private readonly IHubContext<ChatHub> chatHub;
 
-        public ChatController(IChatService chatService)
+        public ChatController(IChatService chatService, IHubContext<ChatHub> chatHub)
         {
             this.chatService = chatService;
+            this.chatHub = chatHub;
         }
 
         // GET: api/Chat
@@ -35,6 +38,12 @@ namespace backend.Controllers
             }
 
             return chat;
+        }
+        [HttpGet("chatsByUser/{id}")]
+        public ActionResult<List<Chat>> chatsByUser(string id)
+        {
+
+            return chatService.FindByUser(id);
         }
 
         // POST: api/Chat

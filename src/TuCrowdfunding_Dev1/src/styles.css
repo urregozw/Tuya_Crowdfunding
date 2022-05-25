@@ -42,10 +42,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 }
 .Logincontent{
-  height: calc(100vh - 140px);
+
+
   max-width: 100%;
-  display: flex;
-  justify-content: center;
+
 
 }
 

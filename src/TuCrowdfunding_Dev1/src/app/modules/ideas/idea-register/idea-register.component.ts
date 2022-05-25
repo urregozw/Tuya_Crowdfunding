@@ -5,6 +5,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import {Location} from '@angular/common';
 import { IdeaDto } from 'src/shared/dtos/Idea.dto';
 import { Editor,Toolbar } from 'ngx-editor';
+import {categories} from 'src/shared/masters/cats'
 @Component({
   selector: 'app-idea-register',
   templateUrl: './idea-register.component.html',
@@ -18,8 +19,8 @@ export class IdeaRegisterComponent implements OnInit {
   userid:any=localStorage.getItem('userId')
   ideaFormGroup: FormGroup[];
   idea:IdeaDto=new IdeaDto();
-
-
+  categories: any[];
+  subcategories:any[];
   constructor(
     private location: Location,
     private formBuilder: FormBuilder,
@@ -27,10 +28,14 @@ export class IdeaRegisterComponent implements OnInit {
     private projectService:ProjectService,
 
     private route: ActivatedRoute,
-  ) { }
+  ) {
+    Object.assign(this, { categories });
+
+  }
 
   ngOnInit(): void {
     this.editor = new Editor();
+
 
 
     this.ideaFormGroup =
@@ -54,9 +59,14 @@ export class IdeaRegisterComponent implements OnInit {
   }
 
   public changeStep(event: any) {
+
+
     this.step = event.selectedIndex + 1;
   }
-
+  categoryChange(){
+    var x=this.categories.filter((data)=>data.category==this.ideaFormGroup[0].value['category'])
+    this.subcategories=x[0]['subcategories']
+  }
   goback(){
     this.router.navigate(['misideas'], { relativeTo: this.route.parent });
   }

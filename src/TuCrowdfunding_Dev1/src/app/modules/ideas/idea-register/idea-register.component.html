@@ -43,19 +43,25 @@
                     <div class="row">
                       <label >Categoria de la idea</label>
                       <mat-form-field appearance="fill" >
-                        <input required
-                            matInput aria-label="State"
-                            formControlName="category" id="category"
-                            >
+                        <mat-select (selectionChange)="categoryChange()" formControlName="category" id="category" >
+                          <mat-option *ngFor="let mainCategory of categories" [value]="mainCategory.category">
+                            {{mainCategory.name}}
+                          </mat-option>
+                        </mat-select>
+
                         </mat-form-field>
                     </div>
                     <div class="row">
                       <label >Categoria de la idea</label>
                       <mat-form-field appearance="fill" >
-                        <input required
-                            matInput aria-label="State"
-                            formControlName="subcategory" id="subcategory"
-                            >
+                            <mat-select formControlName="subcategory" id="subcategory" >
+
+                              <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.value">
+                                {{subcategory.name}}
+                              </mat-option>
+
+
+                            </mat-select>
                         </mat-form-field>
                     </div>
                   <div>

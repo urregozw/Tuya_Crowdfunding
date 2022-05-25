@@ -44,7 +44,7 @@ export class SelectedIdeasComponent implements OnInit {
   }
   getfavs(){
     this.userService.getFavProjects().then((data)=>{
-      data.subscribe((data)=>{console.log(data['projectOfInterest']);
+      data.subscribe((data)=>{
       this.favorites=data['projectOfInterest']
       if (this.favorites.includes(this.idea.id)){
         this.icon="favorite"
@@ -62,7 +62,7 @@ export class SelectedIdeasComponent implements OnInit {
       }
     this.icon="favorite"
     this.userService.addToFavs(request)
-    console.log(request);
+
 
   }
   getIdea(){
@@ -86,12 +86,22 @@ export class SelectedIdeasComponent implements OnInit {
   getDonations(){
 
   this.ideaService.getDonation(this.idea['id']).subscribe((data)=>{
-    this.donators=data.reverse();
+
+
+
     data.forEach(element => {
       this.donations+=element.donatedFunds
 
-    });
+      this.userService.getContributor(element.contributor).subscribe((donator)=>{
 
+        element['contributorName']=donator.name
+
+
+
+      }
+      )
+    });
+    this.donators=data.reverse();
 
 });
 

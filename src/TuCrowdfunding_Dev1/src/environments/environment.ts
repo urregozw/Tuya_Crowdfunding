@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  back: 'https://localhost:44386/'
+  back: 'https://localhost:44386/',
+  ai:'http://localhost:5000/upload'
 };
 
 /*

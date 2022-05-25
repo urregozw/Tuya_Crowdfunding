@@ -9,12 +9,29 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   user=localStorage.getItem("userId")
+  userType=localStorage.getItem("userType")
   constructor(
     private httpClient:HttpClient
   ) { }
 
   async getFavProjects():Promise<Observable<any[]>> {
     return await this.httpClient.get<any[]>(environment.back + 'api/Contributor/'+this.user)
+  }
+  getUser(id){
+    if(this.userType=="contributor"){
+
+      return this.getContributor(id)
+    }
+    else{
+      return this.getEntrepreneur(id)
+    }
+
+
+  }
+  getContributor(id:string):Observable<any>{
+
+
+    return this.httpClient.get<any>(environment.back + `api/Contributor/${id}`)
   }
   addToFavs(data):Promise<any>{
     return new Promise((resolve,reject)=>{
@@ -32,7 +49,7 @@ export class UserService {
   }
   editProject(project:any):Promise<any>{
     const data=JSON.stringify(project)
-    console.log(data);
+
     var url:string = (environment.back + 'api/Project/'+ project.id);
 
 
@@ -47,7 +64,7 @@ export class UserService {
   }
   createProject(project:any):Promise<any>{
     const data=JSON.stringify(project)
-    console.log(data);
+
     var url:string = (environment.back + 'api/Project/'+ project.id);
 
 
@@ -60,13 +77,13 @@ export class UserService {
 
   }
   getEntrepreneur(id:string):Observable<any>{
-    console.log(id);
+
 
     return this.httpClient.get<any>(environment.back + `api/Entrepreneur/${id}`)
   }
 
   getDonation(id:string):Observable<any>{
-    console.log(id);
+
 
     return this.httpClient.get<any>(environment.back + `api/Donation/list/project/${id}`)
   }
@@ -75,6 +92,16 @@ export class UserService {
     return new Promise((resolve,reject)=>{
       resolve(
         this.httpClient.post<any>((environment.back + 'api/Donation'), data,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe()
+
+      )
+    })
+
+
+  }
+  createUser(request):Promise<any>{
+    return new Promise((resolve,reject)=>{
+      resolve(
+        this.httpClient.post<any>((environment.back + 'api/Contributor'), request,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe()
 
       )
     })

@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { User } from "src/shared/dtos/user.dto";
+import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
@@ -12,16 +14,35 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   loggedChange: Subject<boolean> = new Subject<boolean>();
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient,private router:Router) {
 
   }
 
-  login(request) {
-    console.log(request);
+  login(request):Promise<any> {
 
-    //request
-    this.logged=true;
-    this.loggedChange.next(this.logged);
+
+    return new Promise((resolve, reject) => {
+
+      this.httpClient.post<any>((environment.back + 'api/Auth'), request, { headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe((data) => {
+
+        if (data != "El usuario no Existe") {
+          localStorage.setItem('userId',data)
+          this.logged=true
+          this.loggedChange.next(this.logged);
+          resolve(data)
+        }
+        else {
+          reject('No existe')
+        }
+
+      }
+      )
+
+
+
+
+    })
+
 
   }
 
@@ -30,6 +51,8 @@ export class AuthService {
     this.logged=false;
     this.loggedChange.next(this.logged);
     localStorage.removeItem("userId");
+    localStorage.removeItem("userType");
+    this.router.navigate(['ideas/proyectos'])
     //this.currentUserSubject.next(null);
   }
 }

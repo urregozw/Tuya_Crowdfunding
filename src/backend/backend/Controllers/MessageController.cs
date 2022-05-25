@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
 using backend.Services;
-
+using Microsoft.AspNetCore.SignalR;
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
@@ -10,10 +10,13 @@ namespace backend.Controllers
     public class MessageController : ControllerBase
     {
         private readonly IMessageService messageService;
-
-        public MessageController(IMessageService messageService)
+        private readonly IHubContext<ChatHub> chatHub;
+        private readonly IChatService chatService;
+        public MessageController(IMessageService messageService, IHubContext<ChatHub> chatHub,IChatService chatService)
         {
             this.messageService = messageService;
+            this.chatHub = chatHub;
+            this.chatService = chatService;
         }
 
         // GET: api/Message
@@ -42,7 +45,14 @@ namespace backend.Controllers
         public ActionResult<Message> Post([FromBody] Message message)
         {
             messageService.Create(message);
-
+            var chat=chatService.Get(message.Chat);
+            List<object> mensajes = new List<object>();
+            foreach (string msj in chat.Messages)
+            {
+                var mensaje=Get(msj);
+                mensajes.Add(mensaje.Value);
+            }
+            chatHub.Clients.All.SendAsync("messageReceived", chat, mensajes);
             return CreatedAtAction(nameof(Get), new { id = message.Id }, message);
         }
 

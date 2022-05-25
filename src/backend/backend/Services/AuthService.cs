@@ -19,11 +19,20 @@ namespace backend.Services
 
         public string LogIn(LogIn login)
         {
-            if (login.IsEntrepreneur)
+
+            try
             {
-                return _entrepreneurs.Find(entrepreneur => (entrepreneur.Email == login.Email && entrepreneur.Password == login.Password)).FirstOrDefault().Id;
+                if (login.IsEntrepreneur)
+                {
+                    return _entrepreneurs.Find(entrepreneur => (entrepreneur.Email == login.Email && entrepreneur.Password == login.Password)).FirstOrDefault().Id;
+                }
+                return _contributors.Find(contributor => (contributor.Email == login.Email && contributor.Password == login.Password)).FirstOrDefault().Id;
             }
-            return _contributors.Find(contributor => (contributor.Email == login.Email && contributor.Password == login.Password)).FirstOrDefault().Id;
+            catch
+            {
+                return "El usuario no Existe";
+            }
+            
         }
     }
 }

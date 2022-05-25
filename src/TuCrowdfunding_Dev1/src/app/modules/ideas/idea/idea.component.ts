@@ -31,7 +31,7 @@ export class IdeaComponent implements OnInit {
     this.router.navigate(['modificar'], { relativeTo: this.route.parent });
   }
   getfavs(){
-    console.log(this.favorites)
+
     if (this.favorites.includes(this.idea.id)){
       this.icon="favorite"
     }
@@ -43,7 +43,7 @@ export class IdeaComponent implements OnInit {
       }
     this.icon="favorite"
     this.userService.addToFavs(request)
-    console.log(request);
+
 
   }
   getEntrepreneur(){
