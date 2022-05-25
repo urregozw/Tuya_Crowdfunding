@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ListIdeasComponent implements OnInit {
   public proyectos:any;
   public favorites:any;
+  logged:boolean=false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -19,13 +20,17 @@ export class ListIdeasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getFavProjects().then((data)=>{
-      data.subscribe((data)=>{console.log(data['projectOfInterest']);
-      this.favorites=data['projectOfInterest']
+    if(localStorage.getItem('userId')){
+      this.logged=true
+      this.userService.getFavProjects().then((data)=>{
+        data.subscribe((data)=>{
+        this.favorites=data['projectOfInterest']
+        })
+
+
       })
+    }
 
-
-    })
     this.projectService.getProjects().then((data)=>{
       data.subscribe((ideas)=>{
 
@@ -39,8 +44,8 @@ export class ListIdeasComponent implements OnInit {
     this.favorites.forEach((element)=>{
 
     if (element!=''){
-      console.log(element);
-      this.projectService.getProjectById(element).subscribe((data)=>{console.log(data);
+
+      this.projectService.getProjectById(element).subscribe((data)=>{
         this.proyectos.push(data)
         })
     }
@@ -75,7 +80,13 @@ export class ListIdeasComponent implements OnInit {
           this.proyectos=ideas.slice(0, 5)
         }
         if (type=="Completas"){
-          var completedIdeas=ideas.filter((idea)=>(idea.isComplete==true))
+          var completedIdeas=ideas.filter((idea)=>{
+
+           var percentage=(idea['fundsCollected']*100)/idea['fundGoal']
+           if(percentage>60){
+             return idea
+           }
+          })
           this.proyectos=completedIdeas
         }
 

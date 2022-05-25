@@ -1,0 +1,8 @@
+.svgs_Mensajes{
+  min-width: 80px;
+  min-height: 80px;
+  background-color: black;
+  -webkit-mask: url(../../../../assets/icono_chateanos.svg) no-repeat center;
+  mask: url(../../../../assets/icono_chateanos.svg) no-repeat center;
+}
+

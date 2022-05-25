@@ -1,86 +1,105 @@
 <!-- Toolbar -->
 <section class="row">
-    <div class="col">
-        <div class="float-start">
-            <div class="row" style="margin-left: 5px;">
-                <div class="col">
-                    <a href="/ideas/proyectos">
-                    <img src="../assets/logo_tuya.svg" alt="logo-tuya" width="50" height="50">
-                </a>
-                </div>
-                <div class="col">
-                    <div class="vl"></div>
-
-                </div>
-                <div class="col">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Buscar Ideas</mat-label>
-                        <input matInput>
-                    </mat-form-field>
-                </div>
-            </div>
+  <div class="col">
+    <div class="float-start">
+      <div class="row" style="margin-left: 5px;">
+        <div class="col">
+          <a href="/ideas/proyectos">
+            <img src="../assets/logo_tuya.svg" alt="logo-tuya" width="50" height="50">
+          </a>
+        </div>
+        <div class="col">
+          <div class="vl"></div>
 
         </div>
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Buscar Ideas</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+      </div>
+
     </div>
-   <div class="col">
-    <div class="float-end" >
-        <div class="row" style="margin-right: 5px;">
-            <div class="col">
-                <mat-form-field appearance="fill">
-                    <mat-label>Idioma y Moneda</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let option of options" [value]="option.language">
-                            {{option.language}} - {{option.currency}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div *ngIf="!logged" class="col">
-                <div class="row">
-                    <div class="col">
+  </div>
+  <div class="col">
+    <div class="float-end">
+      <div class="row" style="margin-right: 5px;">
+        <div class="col">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <span class="navbar-brand"> </span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+              aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation"
+              (click)="isCollapsed = !isCollapsed">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor03" [ngbCollapse]="isCollapsed" style="z-index: 99999;">
+              <ul class="navbar-nav mr-auto float-end">
+                <li class="nav-item mx-2">
+                  <div *ngIf="!logged" class="col">
+                    <div class="row">
+                      <div class="col">
                         <button (click)="login()" type="button" class="btn btn-primary">Ingresar</button>
 
+                      </div>
+
                     </div>
-
-                </div>
-            </div>
-            <div *ngIf="!logged" class="col">
-                <div class="row">
-                    <div class="col">
-                        <button (click)="signin()"type="button" class="btn btn-primary">Registrarse</button>
+                  </div>
+                </li>
+                <li class="nav-item mx-2">
+                  <div *ngIf="!logged" class="col">
+                    <div class="row">
+                      <div class="col">
+                        <button (click)="signin()" type="button" class="btn btn-primary">Registrarse</button>
+                      </div>
                     </div>
-                </div>
-            </div>
-
-
-
-            <div *ngIf="logged" class="col">
-                <div class="row">
-                    <div class="col">
-                        <button (click)="ideas()" class="circular">
-                            <img src="../assets/Icono_ideas.svg" alt="misIdeas" width="30" height="30"
-                                fill="#ffffff">
+                  </div>
+                </li>
+                <li class="nav-item mx-2">
+                  <div *ngIf="logged" class="col">
+                    <div class="row">
+                      <div class="col">
+                        <button (click)="profile()" class="btn btn-primary">
+                          <span>MI PERFIL</span>
+                          <img src="../assets/Icono_ideas.svg" alt="misIdeas" width="30" height="30" fill="#ffffff">
                         </button>
+                      </div>
                     </div>
-                    <div class="col">
-                        <button (click)="logOut()"class="circular">
-                            <img src="../assets/icono_chateanos.svg" alt="logo-tuya" width="30" height="30"
-                                fill="#ffffff">
+                  </div>
+
+                </li>
+                <li class="nav-item mx-2">
+                  <div *ngIf="logged" class="col">
+                    <div class="row">
+                      <div class="col">
+                        <button (click)="logOut()" class="btn btn-primary">
+                          <span>SALIR</span>
+                          <img src="../assets/icono_cerrar.svg" alt="logo-tuya" width="30" height="30" fill="#ffffff">
                         </button>
+                      </div>
                     </div>
-                </div>
+                  </div>
+
+                </li>
+              </ul>
             </div>
+          </nav>
 
         </div>
+
+
+
+
+      </div>
     </div>
-   </div>
+  </div>
 
 </section>
 
 <div class="content" role="main">
-   <router-outlet></router-outlet>
+
+  <router-outlet></router-outlet>
 </div>
 
 <app-footer></app-footer>
-
-

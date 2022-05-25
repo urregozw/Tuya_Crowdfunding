@@ -24,17 +24,26 @@ import { MisIdeasComponent } from './modules/ideas/mis-ideas/mis-ideas.component
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxEditorModule } from 'ngx-editor';
 import { AuthComponent } from './modules/auth/auth.component';
-
+import { SocialLoginModule, SocialAuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { UserModule } from './modules/user/user.module';
+import { ChatService } from './services/chat.service';
+import { ChatComponent } from './modules/chat/chat.component';
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import { RegistryComponent } from './modules/registry/registry.component';
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     IndexComponent,
     AuthComponent,
-
+    RegistryComponent,
   ],
   imports: [
-
+    NgbCollapseModule,
+    NgxEditorModule,
+    SocialLoginModule,
+    UserModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -52,7 +61,22 @@ import { AuthComponent } from './modules/auth/auth.component';
     FormsModule,     //Add if needed
     MatStepperModule, MatInputModule, MatButtonModule
   ],
-  providers: [SharedDataModule,ProjectService],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '551561859853615' // add web app client id
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig
+    },
+  SharedDataModule,ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class ProjectService {
   user=localStorage.getItem("userId")
+  historic:any
+  historiChange: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     private httpClient:HttpClient
   ) { }
@@ -29,7 +32,7 @@ export class ProjectService {
 
     return new Promise((resolve,reject)=>{
       resolve(
-        this.httpClient.put<any>((environment.back + 'api/Project/'+ project.id), data,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe((data)=>{console.log(data)}
+        this.httpClient.put<any>((environment.back + 'api/Project/'+ project.id), data,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe((data)=>{}
         )
 
       )
@@ -38,7 +41,6 @@ export class ProjectService {
   }
   createProject(project:any):Promise<any>{
     const data=JSON.stringify(project)
-    console.log(data);
     var url:string = (environment.back + 'api/Project/'+ project.id);
 
 
@@ -51,15 +53,20 @@ export class ProjectService {
 
   }
   getEntrepreneur(id:string):Observable<any>{
-    console.log(id);
+
 
     return this.httpClient.get<any>(environment.back + `api/Entrepreneur/${id}`)
   }
 
   getDonation(id:string):Observable<any>{
-    console.log(id);
+
 
     return this.httpClient.get<any>(environment.back + `api/Donation/list/project/${id}`)
+  }
+  getContributorDonation(id):Promise<any>{
+
+
+    return this.httpClient.get<any>(environment.back + `api/Donation/${id}`).toPromise()
   }
 
   donate(data):Promise<any>{
@@ -70,6 +77,10 @@ export class ProjectService {
       )
     })
 
+
+  }
+  async airesponse(idea):Promise<any>{
+     return await this.httpClient.post<any>((environment.ai), idea,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).toPromise()
 
   }
 }
