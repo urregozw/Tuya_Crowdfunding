@@ -21,6 +21,13 @@ namespace backend.Controllers
         }
 
         // GET: api/Project
+        [HttpGet("all")]
+        public ActionResult<List<Project>> GetAll()
+        {
+            return projectService.GetAll();
+        }
+
+        // GET: api/Project
         [HttpGet]
         public ActionResult<List<Project>> Get()
         {
@@ -40,6 +47,21 @@ namespace backend.Controllers
 
             return project;
         }
+
+        // GET: api/Project/search/word
+        [HttpGet("search/{filter}")]
+        public ActionResult<List<Project>> Search(string filter)
+        {
+            var projects = projectService.Search(filter);
+
+            if (projects == null)
+            {
+                return NotFound($"Project with filter = {filter} not found");
+            }
+
+            return projects;
+        }
+
         // GET: api/Project
         [HttpGet("byuser/{userId}")]
         public ActionResult<List<Project>> GetByUserId(string userId)
@@ -75,9 +97,15 @@ namespace backend.Controllers
                 return NotFound($"Project with id = {id} not found");
             }
 
-            projectService.Update(id, project);
-
-            return NoContent();
+            try
+            {
+                projectService.Update(id, project);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return Unauthorized(e);
+            }
         }
 
         // DELETE: api/ApiWithActions/5
@@ -96,6 +124,25 @@ namespace backend.Controllers
             return Ok($"Project with id = {id} deleted");
         }
 
+        // POST: api/Project/
+        [HttpPost("approve")]
+        public ActionResult ApproveProject(string userId, string projectId)
+        {
+            try
+            {
+                Project project = projectService.ApproveProject(userId, projectId);
+                return Ok($"Project {project.Id} approved");
+            } catch(Exception e)
+            {
+                return Unauthorized(e);
+            }
+        }
 
+        // GET: api/Project
+        [HttpGet("unapproved")]
+        public ActionResult<List<Project>> GetUnapproved()
+        {
+            return projectService.GetUnapproved();
+        }
     }
 }

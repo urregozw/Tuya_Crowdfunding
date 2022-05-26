@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
 using backend.Services;
@@ -82,9 +86,32 @@ namespace backend.Controllers
         [HttpPost("project/add")]
         public ActionResult AddProject([FromBody] FavoriteProject favoriteProject)
         {
-            contributorService.AddProjectToInterest(favoriteProject.ContributorId, favoriteProject.ProjectId);
+            try
+            {
+                contributorService.AddProjectToInterest(favoriteProject.ContributorId, favoriteProject.ProjectId);
 
-            return Ok($"Project with id = {favoriteProject.ProjectId} added to interest");
+                return Ok($"Project with id = {favoriteProject.ProjectId} added to interest");
+            }
+            catch(Exception e)
+            {
+                return NotFound(e);
+            }
+        }
+
+        // POST: api/Contributor
+        [HttpPost("project/remove")]
+        public ActionResult RemoveProject([FromBody] FavoriteProject favoriteProject)
+        {
+            try
+            {
+                contributorService.RemoveProjectOfInterest(favoriteProject.ContributorId, favoriteProject.ProjectId);
+
+                return Ok($"Project with id = {favoriteProject.ProjectId} remove of interest");
+            }
+            catch (Exception e)
+            {
+                return NotFound(e);
+            }
         }
 
         // POST: api/Contributor/recharge

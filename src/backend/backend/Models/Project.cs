@@ -16,6 +16,7 @@ namespace backend.Models
         public string Title { get; set; }
 
         [BsonElement("is_complete")]
+        [BsonDefaultValue(false)]
         public bool IsComplete { get; set; }      
 
         [BsonElement("description")]
@@ -47,12 +48,15 @@ namespace backend.Models
         public string SubCategory { get; set; }
 
         [BsonElement("status")]
+        [BsonDefaultValue(0)]
         public int Status { get; set; }
 
         [BsonElement("backers")]
+        [BsonDefaultValue(0)]
         public int Backers { get; set; }
 
         [BsonElement("funds_collected")]
+        [BsonDefaultValue(0)]
         public float FundsCollected { get; set; }
 
         [BsonElement("entrepreneur")]
