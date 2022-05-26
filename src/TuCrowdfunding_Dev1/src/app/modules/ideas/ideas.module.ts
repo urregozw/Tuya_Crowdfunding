@@ -26,6 +26,9 @@ import { NgChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { PreviewComponent } from './preview/preview.component';
+import { ListUnapprovedComponent } from './list-unapproved/list-unapproved.component';
+import { SelectedIdeaByLinkComponent } from './ideas-byLink/selected-ideas.component';
 
 
 @NgModule({
@@ -37,7 +40,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     IdeaComponent,
     ModifyComponent,
     CreateComponent,
-
+    PreviewComponent,
+    ListUnapprovedComponent,
+    SelectedIdeaByLinkComponent
 
   ],
   imports: [

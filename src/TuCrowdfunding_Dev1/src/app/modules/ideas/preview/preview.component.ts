@@ -8,14 +8,14 @@ import { Chart } from 'chart.js';
 import { UserService } from 'src/app/services/user.service';
 import { IdeaTestDto } from 'src/shared/dtos/IdeaTest.dto';
 import { ObjectMethod } from 'src/shared/ObjectMethod';
-import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
-  selector: 'app-selected-ideas',
-  templateUrl: './selected-ideas.component.html',
-  styleUrls: ['./selected-ideas.component.css']
+  selector: 'app-preview',
+  templateUrl: './preview.component.html',
+  styleUrls: ['./preview.component.css']
 })
-export class SelectedIdeasComponent implements OnInit {
+export class PreviewComponent implements OnInit {
+
   public id:any
   public idea:any;
   public routea: string;
@@ -29,11 +29,11 @@ export class SelectedIdeasComponent implements OnInit {
   public favorites:any;
   public userAI:boolean=false;
   public succesRate:any;
-  public userId:any=localStorage.getItem('userId')
+  public userType:any=localStorage.getItem('userType')
+  public isAdmin:boolean=false;
   ideaFormGroup: FormGroup;
   constructor(private router: Router,private route: ActivatedRoute,private ideaService:ProjectService,private sanitazer:DomSanitizer,
-    private formBuilder: FormBuilder,    private userService:UserService,
-    private chatService:ChatService) { }
+    private formBuilder: FormBuilder,    private userService:UserService) { }
 
   ngOnInit(): void {
     var description=document.getElementById('#description')
@@ -41,7 +41,9 @@ export class SelectedIdeasComponent implements OnInit {
 
     this.id= localStorage.getItem('IDidea');
     this.user= localStorage.getItem('userId');
+
     this.getIdea()
+
     this.ideaFormGroup = this.formBuilder.group({
       amount: [0, Validators.required],
   });
@@ -49,49 +51,30 @@ export class SelectedIdeasComponent implements OnInit {
 
 
   }
-  getfavs(){
-    this.userService.getFavProjects().then((data)=>{
-      data.subscribe((data)=>{
-      this.favorites=data['projectOfInterest']
-      if (this.favorites.includes(this.idea.id)){
-        this.icon="favorite"
 
-      }
-      })
-
-
-    })
-
-  }
-  setFavs(){
-    const request={
-      "contributorId":this.user,
-      "projectId":this.idea.id
-      }
-    this.icon="favorite"
-    this.userService.addToFavs(request)
-
-
-  }
   getIdea(){
     this.ideaService.getProjectById(this.id).subscribe((data)=>{
     this.idea=data
-    console.log(data);
-      console.log(this.userId);
-      if(data['entrepreneur']==this.userId){
-        var may: IdeaTestDto = new IdeaTestDto(ObjectMethod.deepCopy(data))
-        console.log(may);
+    console.log(this.user);
+    console.log(data.entrepreneur);
 
-        this.ideaService.airesponse(may).then((data)=>{
-          console.log(data);
-          this.succesRate=data
-          this.userAI=true
-        })
+    if(this.user==data.entrepreneur || this.user=='628d8ebc276aa484b7503aad'){
+      console.log("usuario");
+      if(this.user=='628d8ebc276aa484b7503aad'){
+        this.isAdmin=true
       }
+      else{
+        this.isAdmin=false
+      }
+    }
+    else{
+      console.log("redirect");
+
+    }
+    console.log(data);
 
     this.getEntrepreneur()
     this.getDonations()
-    this.getfavs()
     })
   }
   getEntrepreneur(){
@@ -128,20 +111,6 @@ export class SelectedIdeasComponent implements OnInit {
 
 
   donateIdea(e:any){
-    var request=
-    {
-      "donatedFunds": this.ideaFormGroup.value.amount,
-      "date": "2022-05-02T10:16:57.584Z",
-      "approved": true,
-      "contributor": this.user ,
-      "project": this.id
-    }
-
-     this.ideaService.donate(request).then((data)=>{
-      alert("Donacion realizada con exito")
-      window.location.reload()
-    })
-
 
   }
   changeSect(e){
@@ -159,31 +128,13 @@ export class SelectedIdeasComponent implements OnInit {
     }
   }
 
-  createchat(){
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  aprobarIdea(){
+    this.idea['status']=1
     console.log(this.idea);
-    const Request={
-      'id':this.idea.id,
-      'creationDate':date,
-      'entrepreneur':this.idea.entrepreneur,
-      'contributor':this.userId,
-      'messages':[]
-    }
-    console.log(Request);
-    this.chatService.createChat(Request).then((data)=>{
-      console.log(data);
-      this.router.navigate(['user/chats'])
-
+    this.ideaService.editProject(this.idea).then((data)=>{
+      alert("Idea aprobada")
+      this.router.navigate(['ideas/pending'])
     })
-  }
-  sharable(){
-      let listener = (e: ClipboardEvent|any) => {
-          e.clipboardData.setData('text/plain', `http://localhost:4200/ideas/shared/${this.idea.title}`);
-          e.preventDefault();
-      };
-      document.addEventListener('copy', listener);
-      document.execCommand('copy');
-      document.removeEventListener('copy', listener);
+
   }
 }

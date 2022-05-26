@@ -99,7 +99,9 @@ export class IdeaRegisterComponent implements OnInit {
 
 
     //doc.save('angular-demo.pdf');
-    this.projectService.createProject(this.idea);
+    this.projectService.createProject(this.idea).then((data)=>{
+      this.router.navigate(['ideas/preview'])
+    });
 
 
 

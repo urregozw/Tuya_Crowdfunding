@@ -12,6 +12,8 @@ export class ListIdeasComponent implements OnInit {
   public proyectos:any;
   public favorites:any;
   logged:boolean=false;
+  ideas: any;
+  _asideSubscription: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -20,6 +22,10 @@ export class ListIdeasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._asideSubscription = this.projectService.ideaschange.subscribe((value) => {
+      this.proyectos = value
+
+  })
     if(localStorage.getItem('userId')){
       this.logged=true
       this.userService.getFavProjects().then((data)=>{

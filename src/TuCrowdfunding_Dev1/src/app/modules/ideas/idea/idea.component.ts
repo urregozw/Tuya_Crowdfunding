@@ -76,4 +76,13 @@ export class IdeaComponent implements OnInit {
     }
   }
 
+  sharable(){
+    let listener = (e: ClipboardEvent|any) => {
+        e.clipboardData.setData('text/plain', `http://localhost:4200/ideas/shared/${this.idea.title}`);
+        e.preventDefault();
+    };
+    document.addEventListener('copy', listener);
+    document.execCommand('copy');
+    document.removeEventListener('copy', listener);
+}
 }

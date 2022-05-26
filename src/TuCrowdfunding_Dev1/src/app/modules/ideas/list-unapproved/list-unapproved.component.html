@@ -1,0 +1,36 @@
+
+  <div class="card mx-5 " style="border-radius: 25px;">
+      <div class="card-header" style="border-radius: 25px;">
+        <strong>NUEVAS IDEAS PENDIENTES DE APROBACION</strong>
+      </div>
+      <div class="card-body px-2 py-2  bg-grey">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Idea</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Objetivo</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Subcategoria</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let idea of proyectos">
+            <tr>
+              <td>{{idea.title}}</td>
+              <td>{{idea.entrepreneur}}</td>
+              <td>{{idea.fundGoal}}</td>
+              <td>{{idea.category}}</td>
+              <td>{{idea.subCategory}}</td>
+              <td>
+                <button style="text-decoration: none; color:black" (click)="seeIdea(idea)" class="btn btn-link"> <mat-icon>search</mat-icon>Ver</button>
+
+              </td>
+            </tr>
+          </tbody>
+          </table>
+          </div>
+      </div>
+
+

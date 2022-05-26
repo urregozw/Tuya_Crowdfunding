@@ -1,21 +1,19 @@
 <div class="row">
-  <div>
-    <div *ngIf="userAI" class="col-3 float-end mx-5 text-center">
-      <app-graphs
-      goal='100'
-      collected={{(succesRate.succesRate)*100}}
-    ></app-graphs>
-    <strong class="mt-1">PROBABILIDAD DE EXITO DE TU IDEA</strong>
 
+    <div *ngIf="!isAdmin" class="card-title text-center mt-2">
+      <h3>*Vista previa de tu idea, la cual esta pendiente de aprobacion. Una vez sea aprobada sera visible para todos los usuarios*</h3>
+      <hr>
     </div>
-  </div>
+    <div>
+      <div *ngIf="isAdmin" class="card-title  mt-2 mx-5 float-end">
+        <button (click)="aprobarIdea()" class="btn btn-primary">Aprobar Idea</button>
+      </div>
+    </div>
+
 
     <div class="d-flex justify-content-center">
 
         <div class="ideaCardLarge">
-          <button class="d-flex float-end"(click)="setFavs()" style="background-color:transparent;border: 0;">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">{{icon}}</mat-icon>
-          </button>
             <div class="row">
                 <div class="col-8">
                     <div class="ideaInfoCard">
@@ -34,12 +32,8 @@
 
                         <div class="col">
                             <p>Compartir este proyecto</p>
-                            <button (click)="sharable()" style="background-color: transparent; border:0">
-                              <img src="../../../../assets/facebook-svgrepo-com.svg" style="width: 30px;">
-                            </button>
-                            <button (click)="sharable()" style="background-color: transparent; border:0">
-                              <img src="../../../../assets/whatsapp-svgrepo-com.svg" style="width: 30px;">
-                            </button>
+                            <img src="../../../../assets/facebook-svgrepo-com.svg" style="width: 30px;">
+                            <img src="../../../../assets/whatsapp-svgrepo-com.svg" style="width: 30px;">
 
                         </div>
 
@@ -55,8 +49,8 @@
                     <div>
                         <div style="width:100%;">
                           <app-graphs
-                          goal={{idea.fundGoal}}
-                          collected={{idea.fundsCollected}}
+                          goal='100'
+                          collected='69'
                         ></app-graphs>
 
 
@@ -73,21 +67,17 @@
 
                     <div>
                         <form class="row" [formGroup]="ideaFormGroup" (submit)="donateIdea($event)" novalidate>
-                            <mat-form-field appearance="fill" readonly >
-                                <input required
+                            <mat-form-field appearance="fill"  >
+                                <input required readonly
                                     matInput aria-label="State" type="number"
                                     formControlName="amount" [(ngModel)]="amounts" id="Donatedamount"
                                      >
 
                             </mat-form-field>
                             <button class="btn btn-primary" type="submit"> Donar</button>
-
                         </form>
-
                     </div>
-                    <button class="btn btn-primary mt-2 ml-0 float-end" style="width: 425px;" (click)="createchat()"> Enviar Mensaje</button>
-
-                    </div>
+                </div>
 
             </div>
 
@@ -200,3 +190,4 @@
 
     </div>
 </div>
+
