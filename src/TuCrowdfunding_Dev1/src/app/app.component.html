@@ -13,10 +13,13 @@
 
         </div>
         <div class="col">
-          <mat-form-field appearance="fill">
-            <mat-label>Buscar Ideas</mat-label>
-            <input matInput>
-          </mat-form-field>
+          <form (ngSubmit)="filter()" [formGroup]="filterIdea">
+            <mat-form-field appearance="fill">
+              <mat-label>Buscar Ideas</mat-label>
+              <input formControlName="content" matInput>
+            </mat-form-field>
+          </form>
+
         </div>
       </div>
 

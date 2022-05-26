@@ -48,33 +48,38 @@ export class RegistryComponent implements OnInit {
   // convenience getter for easy access to form fields
 
   onSubmit() {
+    if(this.loginForm.status=='VALID'){
+      if(this.loginForm.value['passwordConfirm']==this.loginForm.value['Password']){
 
-    if(this.loginForm.value['passwordConfirm']==this.loginForm.value['Password']){
-
-      const Request={
-        "name": this.loginForm.value.name,
-        "username": this.loginForm.value.username,
-        "email": this.loginForm.value.Email,
-        "password": this.loginForm.value.Password,
-        "address": this.loginForm.value.address,
-        "money": 0,
-        "donations": [],
-        "projectOfInterest": [],
-        "chats": []
-      }
-      this.userService.createUser(Request).then((resolve)=>{
-        alert('Usuario Creado con exito')
-        const login={
+        const Request={
+          "name": this.loginForm.value.name,
+          "username": this.loginForm.value.username,
           "email": this.loginForm.value.Email,
           "password": this.loginForm.value.Password,
-          "IsEntrepreneur":false
+          "address": this.loginForm.value.address,
+          "money": 0,
+          "donations": [],
+          "projectOfInterest": [],
+          "chats": []
         }
-        this.authService.login(login).then((logged)=>{
-          localStorage.setItem('userType','contributor')
-          this.router.navigate(['ideas/proyectos'])
-        })
-            })
+        this.userService.createUser(Request).then((resolve)=>{
+          alert('Usuario Creado con exito')
+          const login={
+            "email": this.loginForm.value.Email,
+            "password": this.loginForm.value.Password,
+            "IsEntrepreneur":false
+          }
+          this.authService.login(login).then((logged)=>{
+            localStorage.setItem('userType','contributor')
+            this.router.navigate(['ideas/proyectos'])
+          })
+              })
+      }
     }
+    else{
+      alert('Por favor diligencia correctamente el formulario de registro')
+    }
+
 
 
   }

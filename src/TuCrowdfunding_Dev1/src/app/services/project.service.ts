@@ -10,14 +10,22 @@ export class ProjectService {
   user=localStorage.getItem("userId")
   historic:any
   historiChange: Subject<boolean> = new Subject<boolean>();
-
+  ideas:any
+  ideaschange: Subject<boolean> = new Subject<boolean>();
   constructor(
+
     private httpClient:HttpClient
   ) { }
 
   async getProjects():Promise<Observable<any[]>> {
     return await this.httpClient.get<any[]>(environment.back + 'api/Project')
   }
+
+  async getUnapproved():Promise<Observable<any[]>> {
+    return await this.httpClient.get<any[]>(environment.back + 'api/Project/unapproved')
+  }
+
+
   getProjectById(id):Observable<any>{
     return this.httpClient.get<any>(environment.back + `api/Project/${id}`)
   }
@@ -84,6 +92,10 @@ export class ProjectService {
      return await this.httpClient.post<any>((environment.ai), idea,{ headers: { 'Content-Type': 'application/json;odata=verbose'}}).toPromise()
 
   }
+  getFiltredIdeas(regex):Promise<any>{
+    return this.httpClient.get<any>((environment.back + `api/Project/search/${regex}`)).toPromise()
+
+ }
 }
 
 

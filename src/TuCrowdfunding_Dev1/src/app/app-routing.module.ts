@@ -7,7 +7,7 @@ import { AuthComponent } from './modules/auth/auth.component';
 import { ChatComponent } from './modules/chat/chat.component';
 import { RegistryComponent } from './modules/registry/registry.component';
 const routes: Routes = [
-  {path: 'index', component: IndexComponent },
+  {path: '', redirectTo: '/ideas/proyectos',pathMatch: 'full' },
   {path: 'ideas',loadChildren: () => import('./modules/ideas/ideas.module').then(m => m.IdeasModule)},
   {path: 'user',loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)},
   {path:'login',component:AuthComponent},

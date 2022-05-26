@@ -25,4 +25,12 @@ export class ChatService {
       )
     })
   }
+  async createChat(request:any):Promise<any>{
+    return await new Promise((resolve,reject)=>{
+      resolve(
+        this.httpClient.post<any>((environment.back + 'api/Chat'), request,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).subscribe()
+
+      )
+    })
+  }
 }

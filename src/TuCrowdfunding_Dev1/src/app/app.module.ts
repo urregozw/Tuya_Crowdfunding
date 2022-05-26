@@ -78,7 +78,7 @@ import { SharedModule } from './modules/shared/shared.module';
         ]
       } as SocialAuthServiceConfig
     },
-  SharedDataModule,ProjectService],
+  SharedDataModule,ProjectService,ListIdeasComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
