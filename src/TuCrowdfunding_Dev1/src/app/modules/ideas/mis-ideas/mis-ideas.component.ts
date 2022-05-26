@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
+import { IdeaTestDto } from 'src/shared/dtos/IdeaTest.dto';
+import { ObjectMethod } from 'src/shared/ObjectMethod';
 @Component({
   selector: 'app-mis-ideas',
   templateUrl: './mis-ideas.component.html',
@@ -13,7 +15,7 @@ export class MisIdeasComponent implements OnInit {
 
     private router: Router,
     private route: ActivatedRoute,
-    private projectService:ProjectService
+    private projectService:ProjectService,
   ) { }
 
    ngOnInit() {
@@ -21,6 +23,7 @@ export class MisIdeasComponent implements OnInit {
     this.projectService.getProjectsbyUser().then((data)=>{
     data.subscribe((ideas)=>{
       this.ideas=ideas
+
     });
     })
 

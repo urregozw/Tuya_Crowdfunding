@@ -27,14 +27,19 @@ import { SocialLoginModule, SocialAuthServiceConfig } from "angularx-social-logi
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
 import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import { GraphsComponent } from '../graphs/graphs.component';
+import { IdeasModule } from '../ideas/ideas.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     ProfileComponent,
     HistoricGraphComponent,
     ChatComponent,
+
   ],
   imports: [
+    SharedModule,
     NgxChartsModule,
     NgChartsModule,
     FormsModule,

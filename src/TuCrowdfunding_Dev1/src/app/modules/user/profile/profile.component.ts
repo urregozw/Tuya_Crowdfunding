@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   entrepreneur:boolean=this.isEntrepreneur
   myDonations:any[]=[]
   Historic:any[]=[]
+  myProyects:any[]=[]
   constructor(private userService:UserService,private projectsService:ProjectService,
     private changeDetection: ChangeDetectorRef,
     private authService:AuthService,
@@ -44,6 +45,11 @@ export class ProfileComponent implements OnInit {
   mensajes(){
     this.router.navigate(['user/chats'])
   }
+  misIdeas(){
+    console.log('s');
+
+    this.router.navigate(['ideas/misideas'])
+  }
   getUser(){
     this.userService.getUser(this.userId).subscribe((data)=>{
       console.log(data);
@@ -61,7 +67,12 @@ export class ProfileComponent implements OnInit {
     }
     )
   }
+  seeIdea(idea){
+    console.log(idea);
+    localStorage.setItem('IDidea',idea.id)
+    this.router.navigate([`ideas/${idea.title}`])
 
+  }
   getProjects(){
     var Data:any[]=[]
     var DataInfo:any={}
@@ -70,18 +81,11 @@ export class ProfileComponent implements OnInit {
 
       data.subscribe(async (response)=>{
         console.log(response);
-
+        this.myProyects=response
         var tempresponse:any[]=[]
         response.forEach(async project=>{
 
-          var may: IdeaTestDto = new IdeaTestDto(ObjectMethod.deepCopy(project))
-          console.log(may);
 
-          await this.projectsService.airesponse(may).then((data)=>{
-            console.log(data);
-            tempresponse.push(data)
-            console.log(tempresponse);
-          })
           DataInfo[project['title']]=[]
           project['donations'].forEach((async donation=>{
             var value:any=0

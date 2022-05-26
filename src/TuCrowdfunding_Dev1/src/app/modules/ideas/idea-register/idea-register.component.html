@@ -32,7 +32,7 @@
                   <div class="row">
                       <label >Objetivo a recaudar</label>
                       <mat-form-field appearance="fill" readonly >
-                        <input required
+                        <input required type="number"
                             matInput aria-label="State"
                             formControlName="fundGoal"  id="fundGoal"
                              >
@@ -52,7 +52,7 @@
                         </mat-form-field>
                     </div>
                     <div class="row">
-                      <label >Categoria de la idea</label>
+                      <label >SubCategoria de la idea</label>
                       <mat-form-field appearance="fill" >
                             <mat-select formControlName="subcategory" id="subcategory" >
 
@@ -122,12 +122,12 @@
                 <div class="row card-basic">
                   <div class="row">
                     <label >PDF de documentacion</label>
-                    <mat-form-field appearance="fill" >
-                      <input required
-                          matInput aria-label="State"
-                          formControlName="pdf" id="ideatittle"
-                          >
-                      </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <ngx-mat-file-input  matInput formControlName="pdf" [accept]="'.pdf'" ></ngx-mat-file-input>
+                      <mat-icon matSuffix>folder</mat-icon>
+                    </mat-form-field>
+
+
                   </div>
                   <div class="row">
                     <label >Adjunta video de Youtube</label>

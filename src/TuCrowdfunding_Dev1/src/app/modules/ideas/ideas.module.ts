@@ -24,7 +24,8 @@ import { NgxEditorModule } from 'ngx-editor';
 import { GraphsComponent } from '../graphs/graphs.component';
 import { NgChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { SharedModule } from '../shared/shared.module';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 
 @NgModule({
@@ -36,13 +37,12 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     IdeaComponent,
     ModifyComponent,
     CreateComponent,
-    GraphsComponent
+
 
   ],
   imports: [
-    NgxChartsModule,
-    NgChartsModule,
-
+    MaterialFileInputModule,
+    SharedModule,
     NgxEditorModule,
     YouTubePlayerModule,
     ReactiveFormsModule,//Add if needed
@@ -58,7 +58,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatSelectModule,
     MatToolbarModule,
     MatStepperModule,
-    MatStepperModule, MatInputModule, MatButtonModule
-  ]
+    MatStepperModule,
+    MatButtonModule
+  ],
+  exports: [GraphsComponent]
 })
 export class IdeasModule { }

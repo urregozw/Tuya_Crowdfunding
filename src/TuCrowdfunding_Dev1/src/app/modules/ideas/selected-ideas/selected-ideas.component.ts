@@ -6,6 +6,8 @@ import { ProjectService } from 'src/app/services/project.service';
 import { StringDecoder } from 'string_decoder';
 import { Chart } from 'chart.js';
 import { UserService } from 'src/app/services/user.service';
+import { IdeaTestDto } from 'src/shared/dtos/IdeaTest.dto';
+import { ObjectMethod } from 'src/shared/ObjectMethod';
 
 @Component({
   selector: 'app-selected-ideas',
@@ -24,6 +26,9 @@ export class SelectedIdeasComponent implements OnInit {
   public donators:any;
   public icon="favorite_border";
   public favorites:any;
+  public userAI:boolean=false;
+  public succesRate:any;
+  public userId:any=localStorage.getItem('userId')
   ideaFormGroup: FormGroup;
   constructor(private router: Router,private route: ActivatedRoute,private ideaService:ProjectService,private sanitazer:DomSanitizer,
     private formBuilder: FormBuilder,    private userService:UserService) { }
@@ -48,6 +53,7 @@ export class SelectedIdeasComponent implements OnInit {
       this.favorites=data['projectOfInterest']
       if (this.favorites.includes(this.idea.id)){
         this.icon="favorite"
+
       }
       })
 
@@ -68,7 +74,18 @@ export class SelectedIdeasComponent implements OnInit {
   getIdea(){
     this.ideaService.getProjectById(this.id).subscribe((data)=>{
     this.idea=data
+    console.log(data);
+      console.log(this.userId);
+      if(data['entrepreneur']==this.userId){
+        var may: IdeaTestDto = new IdeaTestDto(ObjectMethod.deepCopy(data))
+        console.log(may);
 
+        this.ideaService.airesponse(may).then((data)=>{
+          console.log(data);
+          this.succesRate=data
+          this.userAI=true
+        })
+      }
 
     this.getEntrepreneur()
     this.getDonations()

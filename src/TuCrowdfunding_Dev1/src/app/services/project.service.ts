@@ -26,6 +26,7 @@ export class ProjectService {
   }
   editProject(project:any):Promise<any>{
     const data=JSON.stringify(project)
+    console.log(data);
 
     var url:string = (environment.back + 'api/Project/'+ project.id);
 
@@ -80,7 +81,7 @@ export class ProjectService {
 
   }
   async airesponse(idea):Promise<any>{
-     return await this.httpClient.post<any>((environment.ai), idea,{ headers: { 'Content-Type': 'application/json;odata=verbose' } }).toPromise()
+     return await this.httpClient.post<any>((environment.ai), idea,{ headers: { 'Content-Type': 'application/json;odata=verbose'}}).toPromise()
 
   }
 }

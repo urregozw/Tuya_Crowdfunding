@@ -1,4 +1,15 @@
 <div class="row">
+  <div>
+    <div *ngIf="userAI" class="col-3 float-end mx-5 text-center">
+      <app-graphs
+      goal='100'
+      collected={{(succesRate.succesRate)*100}}
+    ></app-graphs>
+    <strong class="mt-1">PROBABILIDAD DE EXITO DE TU IDEA</strong>
+
+    </div>
+  </div>
+
     <div class="d-flex justify-content-center">
 
         <div class="ideaCardLarge">
@@ -43,6 +54,8 @@
                           goal={{idea.fundGoal}}
                           collected={{idea.fundsCollected}}
                         ></app-graphs>
+
+
                         </div>
                     </div>
                     <div style="margin-top: 10px">
@@ -95,33 +108,7 @@
                               <div innerHTML="{{idea.description}}"></div>
                             </div>
 
-                            <div class="col-4">
 
-                                <div class="d-flex justify-content-center">
-                                <div>
-                                    <H1>En Caso de no recaudar el dinero haremos:</H1>
-                                    <ul>
-                                        <li>
-                                            <h2>OP1</h2>
-                                            <h3>OP1</h3>
-                                        </li>
-                                        <li>
-                                            <h2>OP1</h2>
-                                            <h3>OP1</h3>
-                                        </li>
-                                        <li>
-                                            <h2>OP1</h2>
-                                            <h3>OP1</h3>
-                                        </li>
-                                        <li>
-                                            <h2>OP1</h2>
-                                            <h3>OP1</h3>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                            </div>
                             <div style="margin: 25px;">
                                 <span>
                                     Para mas informacion puedes ver nuestro proyecto <a href="{{idea.pdf}}">aqui</a>

@@ -44,8 +44,8 @@
 
           <div class="row">
             <div class="col">
-              <button class="btn btn-primary">
-                Configuracion
+              <button (click)="misIdeas()" class="btn btn-primary">
+                Mis ideas
 
               </button>
 
@@ -78,6 +78,23 @@
           </div>
           <div class="card-footer">
             <span class="font-weight-bold">Donaciones en tus proyectos</span>
+
+          </div>
+        </div>
+        <div  *ngIf="entrepreneur" class="card text-center mt-5" style="background-color: var(--idea-color);">
+          <div   class="card-body" >
+            <div style="height: 10px;" *ngFor="let idea of myProyects" class="p-3 py-5 mt-2 col">
+              <button class="btn btn-link" (click)="seeIdea(idea)" style="text-decoration: none; color:black"><strong>{{idea.title}} </strong> <mat-icon>edit</mat-icon></button>
+
+              <app-graphs
+              goal={{idea.fundGoal}}
+              collected={{idea.fundsCollected}}
+            ></app-graphs>
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <span class="font-weight-bold">Estado de tus proyectos</span>
 
           </div>
         </div>

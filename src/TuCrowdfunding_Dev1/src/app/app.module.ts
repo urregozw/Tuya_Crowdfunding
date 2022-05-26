@@ -31,6 +31,7 @@ import { ChatService } from './services/chat.service';
 import { ChatComponent } from './modules/chat/chat.component';
 import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegistryComponent } from './modules/registry/registry.component';
+import { SharedModule } from './modules/shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { RegistryComponent } from './modules/registry/registry.component';
     RegistryComponent,
   ],
   imports: [
+    SharedModule,
     NgbCollapseModule,
     NgxEditorModule,
     SocialLoginModule,

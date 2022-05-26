@@ -30,8 +30,8 @@ constructor(idea){
   this.deadline_month=parseInt(deadline.split('-')[1])
   this.launched_year=parseInt(launchedDate.split('-')[0])
   this.launched_month=parseInt(launchedDate.split('-')[1])
-  this.cat= 'cat_Games'//idea['category'];
-  this.min_cat= 'main_cat_Games'//idea['subCategory'];
+  this.cat= idea['category'];
+  this.min_cat= idea['subCategory'];
   this.curr_USD=1;
   this.country_US=1;
   this.pledged=idea['fundsCollected']/4000;

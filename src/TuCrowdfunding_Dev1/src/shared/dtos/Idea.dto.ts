@@ -14,7 +14,8 @@ export class IdeaDto{
   backers: number;
   fundsCollected: number;
   entrepreneur: string;
-  donations= []
+  donations= [];
+  subCategory:any;
 
 
 }

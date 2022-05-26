@@ -6,6 +6,10 @@ import {Location} from '@angular/common';
 import { IdeaDto } from 'src/shared/dtos/Idea.dto';
 import { Editor,Toolbar } from 'ngx-editor';
 import {categories} from 'src/shared/masters/cats'
+import jspdf from 'jspdf';
+import { getDocument } from "pdfjs-dist";
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-idea-register',
   templateUrl: './idea-register.component.html',
@@ -13,7 +17,7 @@ import {categories} from 'src/shared/masters/cats'
 })
 export class IdeaRegisterComponent implements OnInit {
   public stepNames = ["Definamos tu idea", "Cuentanos de tu idea", "Material de soporte"];
-  public step = 1;
+  public step = 3;
   editor: Editor;
   html: '';
   userid:any=localStorage.getItem('userId')
@@ -83,7 +87,6 @@ export class IdeaRegisterComponent implements OnInit {
     this.idea.creationDate= date;
     this.idea.deadline= date2;
     this.idea.video= this.ideaFormGroup[2].value.videoLink;
-    this.idea.pdf= this.ideaFormGroup[2].value.pdf;
     this.idea.fundGoal= parseInt(this.ideaFormGroup[0].value.fundGoal);
     this.idea.category= this.ideaFormGroup[0].value.category;
     this.idea.status=0;
@@ -91,10 +94,16 @@ export class IdeaRegisterComponent implements OnInit {
     this.idea.fundsCollected= 0;
     this.idea.entrepreneur= this.userid;
     this.idea.donations= []
+    var url=URL.createObjectURL((this.ideaFormGroup[2].value.pdf['_files'][0]))
+    this.idea.pdf=url.toString();
+
+
+    //doc.save('angular-demo.pdf');
     this.projectService.createProject(this.idea);
 
 
 
 }
+
 }
 
