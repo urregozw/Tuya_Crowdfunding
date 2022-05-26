@@ -34,9 +34,24 @@ namespace backend.Services
         public void AddProjectToInterest(string contributorId, string projectId)
         {
             Contributor contributor = _contributor.Find(contributor => contributor.Id == contributorId).FirstOrDefault();
+            if(contributor.ProjectOfInterest.Contains(projectId)) {
+                throw new Exception("Project already added");
+            }
             contributor.ProjectOfInterest.Add(projectId);
             _contributor.ReplaceOne(contributor => contributor.Id == contributorId, contributor);
 
+        }
+
+        public void RemoveProjectOfInterest(string contributorId, string projectId)
+        {
+            Contributor contributor = _contributor.Find(contributor => contributor.Id == contributorId).FirstOrDefault();
+            if (contributor.ProjectOfInterest.Contains(projectId))
+            {
+                contributor.ProjectOfInterest.Remove(projectId);
+                _contributor.ReplaceOne(contributor => contributor.Id == contributorId, contributor);
+                return;
+            }
+            throw new Exception("Project is not in interest");
         }
 
         public void Remove(string id)
